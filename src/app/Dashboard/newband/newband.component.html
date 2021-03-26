@@ -1,0 +1,157 @@
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class="app-card">
+        <mat-card>
+
+
+            <div class="card-content-content">
+                <button (click)="backfun()"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary mb-3">{{'Go to list' | translate}}</button>
+
+                <h1 mat-dialog-title *ngIf="casterId">{{'Update' | translate}}</h1>
+                <h1 mat-dialog-title *ngIf="!casterId">{{'Add' | translate}}</h1>
+
+                <form [formGroup]="casterForm" #castForm="ngForm">
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="firstName" [placeholder]="'FirstName' | translate"
+                                autocomplete="firstName">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['FirstName'].touched && !myForm.controls['FirstName'].valid">
+                            <mat-error *ngIf="myForm.controls['FirstName'].hasError('required') "
+                                class="required alert-error">
+                                You must include a First Name.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="lastName" [placeholder]="'LastName' | translate"
+                                autocomplete="lastName">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['LastName'].touched && !myForm.controls['LastName'].valid">
+                            <mat-error *ngIf="myForm.controls['LastName'].hasError('required') "
+                                class="required alert-error">
+                                You must include a Last Name.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <textarea matInput formControlName="address" [placeholder]="'Address' | translate"
+                                autocomplete="address"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput type="email" formControlName="email1" [placeholder]="'Email1' | translate"
+                                type="email" autocomplete="email1">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['Email'].touched && !myForm.controls['Email'].valid">
+                            <mat-error *ngIf="myForm.controls['Email'].hasError('required') "
+                                class="required alert-error">
+                                You must include a Email.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput type="email" formControlName="email2" [placeholder]="'Email2' | translate"
+                                type="email" autocomplete="email2">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="phone1" [placeholder]="'Phone1' | translate" type="number"
+                                autocomplete="phone1">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['Phone'].touched && !myForm.controls['Phone'].valid">
+                            <mat-error *ngIf="myForm.controls['Phone'].hasError('required') "
+                                class="required alert-error">
+                                You must include a Phone.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="phone2" [placeholder]="'Phone2'| translate" type="number"
+                                autocomplete="phone2">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="fax" [placeholder]="'Fax' | translate" autocomplete="fax">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="company" [placeholder]="'Company' | translate"
+                                autocomplete="company">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <textarea matInput formControlName="notes" [placeholder]="'Notes' | translate"
+                                autocomplete="notes"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Disabled' | translate" formControlName="disabled">
+
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="website" [placeholder]="'Website' | translate"
+                                autocomplete="website">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="username" [placeholder]="'Username' | translate"
+                                type="text" autocomplete="username">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['UserName'].touched && !myForm.controls['UserName'].valid">
+                            <mat-error *ngIf="myForm.controls['UserName'].hasError('required') "
+                                class="required alert-error">
+                                You must include a Username.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="full-wid">
+                            <input matInput formControlName="password" [placeholder]="'Password' | translate"
+                                autocomplete="password">
+                        </mat-form-field>
+                        <!-- <mat-error *ngIf="myForm.controls['Password'].touched && !myForm.controls['Password'].valid">
+                            <mat-error *ngIf="myForm.controls['Password'].hasError('required') "
+                                class="required alert-error">
+                                You must include a Password.
+                            </mat-error>
+                        </mat-error> -->
+                    </div>
+
+                    <div style="margin-bottom: 50px;">
+                        <button *ngIf="!casterId" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                            (click)="addCaster()">{{'Add' | translate}}</button>
+                        <button *ngIf="casterId" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                            (click)="editCaster()">{{'Update' | translate}}</button>
+                    </div>
+                </form>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+.ITN_text{
+    float: right;
+    width: 19%;
+    position: relative;
+    display: block;
+    font-size: 12px;
+    top: 25px;
+    float:right;
+    display: block;
+}
+.inputBox{
+     width:80%;
+     float:left;
+}
+@media(max-width:600px) and (min-width:501px){
+    .ITN_text{
+        font-size:10px;
+}
+}
+@media(max-width:500px) and (min-width:480px){
+    .ITN_text{
+        font-size:9px;
+}
+}
+@media(max-width:479px) and (min-width:445px){
+    .ITN_text{
+        font-size:8px;
+}
+}
+@media(max-width:445px){
+    .ITN_text{
+        width:100%;
+             top: -16px;
+     position:relative;
+}
+.inputBox{
+     width:100%;
+
+}
+}
+.adsSelect{
+width: 48% !important;
+}
+
+table input{
+    width: 100px;
+}
+
+input[type=datetime-local]{
+    min-width: 192px;
+}
+.add_role table td{
+    padding:5px;
+}
+.add_role table td input,.add_role table,.add_role table td textarea{
+    padding:8px;
+    width:90%;
+    border:1px solid #dddddd;
+    border-radius:3px;
+}

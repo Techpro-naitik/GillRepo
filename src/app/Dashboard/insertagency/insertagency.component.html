@@ -1,0 +1,37 @@
+<button class=" buttonClose" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class=" app-card search-row-wrapper" style="position: relative;">
+
+        <mat-card>
+
+            <h1 mat-dialog-title *ngIf="data">{{'Update' | translate}}</h1>
+            <h1 mat-dialog-title *ngIf="!data">{{'Add' | translate}}</h1>
+
+            <div class="card-content-content">
+                <!-- <button type="submit" class="btn btn-primary mat-raised-button mat-button-base mat-accent"
+                    (click)="backtolist()">Back To list</button> -->
+                <form [formGroup]="_agencyForm">
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="name" [placeholder]="'Name' | translate"
+                                autocomplete="name">
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field class="form-group">
+                        <mat-select [placeholder]="'Rank' | translate" formControlName="agencyRankId">
+                            <mat-option *ngFor="let rank of ranksData" [value]="rank.id"
+                                [ngStyle]="{'background-color': rank.color}">{{rank.rank}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </form>
+                <button *ngIf="!data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="createAgency()">{{'Add' | translate}}</button>
+                <button *ngIf="data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="editAgency()">{{'Update' | translate}}</button>
+                <button mat-button [mat-dialog-close] style="background-color:#dddddd;" class="btn ml-3">{{'Cancel' | translate}}</button>
+            </div>
+        </mat-card>
+    </div>
+</div>

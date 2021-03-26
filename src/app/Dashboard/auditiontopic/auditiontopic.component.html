@@ -1,0 +1,57 @@
+<div class="app-card-title mb-4">
+    <!-- <anglo-title-component title="Search Row"></anglo-title-component> -->
+</div>
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-content-content">
+            <button type="submit" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                (click)="updateprops(false)">{{'Add a sub-topic' | translate}}</button>
+            <div class="table-responsive overflow-hidden">
+                <table style="box-shadow:none !important;" #table mat-table [dataSource]="dataSource" matSort
+                    matSortDirection="asc" matSortDisableClear class="mat-elevation-z8 full-wid shelfInquiry">
+
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index;">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(element) : null"
+                                [checked]="selection.isSelected(element)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="topicName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Name' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.topicName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Edited">
+                        <th mat-header-cell *matHeaderCellDef>{{'Action' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-icon class="icon-color editBtn" style="cursor:pointer" (click)="updateprops(element)">
+                                edit
+                            </mat-icon>
+                            <mat-icon class="icon-color dltBtn" style="cursor:pointer"
+                                (click)="openDialog('Delete',element)">delete
+                            </mat-icon>
+                        </td>
+
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+                </table>
+                <div>
+                    <button type="button" (click)="deleteAllSelected()"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-warn pull-right mt-2">{{'Delete Selected' | translate}}
+                    </button>
+                </div>
+            </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        </div>
+    </mat-card>
+</div>

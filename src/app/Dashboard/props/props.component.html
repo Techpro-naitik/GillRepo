@@ -1,0 +1,102 @@
+<div class="app-card-title mb-4">
+    <!-- <anglo-title-component title="Search Row"></anglo-title-component> -->
+</div>
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-content-content">
+            <button type="submit" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                (click)="addProps()">{{'Add Capabilities' | translate}}</button>
+
+            <div class="table-responsive overflow-hidden">
+                <table style="box-shadow:none !important;" #table mat-table [dataSource]="dataSource" matSort
+                    matSortDirection="asc" matSortDisableClear class="mat-elevation-z8 full-wid props">
+
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index;">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(element) : null"
+                                [checked]="selection.isSelected(element)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="prop5Name">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Name' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.prop5Name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="CategoryName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Category Name' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.CategoryName ? element.CategoryName : 'null'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="order">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Order' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.order ? element.order : 'null'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="text1">
+                        <th mat-header-cell *matHeaderCellDef>{{'Text' | translate}} 1</th>
+                        <td mat-cell *matCellDef="let element">
+                            <span
+                                *ngIf="element.options[0]">{{element.options[0] ? element.options[0].value  : '-'}}</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="text2">
+                        <th mat-header-cell *matHeaderCellDef>{{'Text' | translate}} 2</th>
+                        <td mat-cell *matCellDef="let element">{{element.options[1] ? element.options[1].value : '-'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="text3">
+                        <th mat-header-cell *matHeaderCellDef>{{'Text' | translate}} 3</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.options[2] ? element.options[2].value : '-'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="text4">
+                        <th mat-header-cell *matHeaderCellDef>{{'Text' | translate}} 4</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.options[3] ? element.options[3].value : '-'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="text5">
+                        <th mat-header-cell *matHeaderCellDef>{{'Text' | translate}} 5</th>
+                        <td mat-cell *matCellDef="let element">{{element.options[4] ? element.options[4].value : '-'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Edited">
+                        <th mat-header-cell *matHeaderCellDef>{{'Action' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-icon class="icon-color editBtn " (click)="updateprops(element)" style="cursor:pointer">
+                                edit
+                            </mat-icon>
+                            <mat-icon class="icon-color dltBtn " (click)="openDialog('Delete', element)"
+                                style="cursor:pointer">delete
+                            </mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+
+                </table>
+                <div>
+                    <button type="button" (click)="deleteAllSelected()"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-warn pull-right mt-2">{{'Delete Selected' | translate}}
+                    </button>
+                </div>
+            </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        </div>
+    </mat-card>
+</div>

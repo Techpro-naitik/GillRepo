@@ -1,0 +1,20 @@
+mat-dialog-container{
+    position: relative !important;
+}
+
+
+
+@media(max-width:320px){
+    .breadcrumb-container{
+        overflow:auto;
+         width:80%;
+         margin-left:0px;
+     }
+     .breadcrumb-container mat-card{
+         width:100%;
+      }
+      .breadcrumb-title{
+         font-size:10px !important;
+         font-weight:900;
+      }
+  }

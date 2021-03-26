@@ -1,0 +1,40 @@
+form mat-form-field{
+    display: block;
+    width: 90%;
+    padding: 10px;
+}
+
+@media(max-width:500px){
+    form mat-form-field{
+        display: block;
+        width: 100%;
+    }
+}
+
+@media(max-width:1279px){
+    form mat-form-field{
+        display: block;
+        width: 100%;
+    }
+}
+
+.pageForm mat-form-field{
+    width: 35%;
+}
+
+input[type=text], input[type=textarea]{
+    margin-right: 10px;
+}
+
+table{
+    width: 60%;
+}
+
+a:link {
+    color: blue;
+}
+  
+  /* visited link */
+  a:visited {
+    color: purple;
+}

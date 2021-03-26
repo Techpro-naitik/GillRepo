@@ -1,0 +1,29 @@
+.modalBtn{
+  color: #7e78dc;
+    text-decoration: underline;
+    margin-top: 10px;
+    display: block;
+    cursor: pointer !important;
+}
+.card-title{
+    font-size: 21px !important;
+    font-weight: 600;
+}
+@media(max-width:350px){
+.card-title{
+    font-size: 17px !important;
+    font-weight: 600;
+}
+}
+.parentDiv{
+  width:65%;
+}
+@media(max-width:670px){
+  .parentDiv{
+    width:100%;
+    margin:0 !important;
+  }
+  .parentDiv .app-card{
+    padding:0 !important;
+  }
+}

@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="selectBtn">
+        <mat-checkbox [(ngModel)]="artist.isSelected" (change)="onChange($event.checked)">
+        </mat-checkbox>
+    </div>
+    <div class="leftBox">
+        <img *ngIf="artist?.tookAJob === 1? true : false" class="jobImg" src="../../../assets/image/job.png"> </div>
+    <!-- <div class="rightBox">
+
+    </div> -->
+    <!-- <div *ngIf="artist?.tookAJob === 1? true : false" class="leftBox">
+        <img class="img-responsive" src="../../../assets/image/job.png">
+    </div> -->
+    <div class="py-1 mt-2 profileCard rightBox"
+        [ngStyle]="{ border: artist.color != null ? '5px solid '+ artist.color : '5px solid white', backgroundColor: artist.isSelected === true? 'lightblue':'white'}">
+     
+        <div fxLayout="row">
+            <div class="p-0 full-wid profileCardGrandSon" fxLayoutAlign="start start">
+                <div class="mr-3 imgDiv mb-3" style="width: 67%; height: 205px;">
+                    <div *ngFor="let image of artistPicturesForDisplay" class="mr-2 mb-2 imageparent">
+                        <img *ngIf="atMost > 0" class="img-responsive" style="height:205px;width:150px;"
+                            src="http://shalashapi.azurewebsites.net/Uploads/{{image?.fileName}}">
+                    </div>
+                </div>
+                <div class="contentProfile ml-2">
+                    <p><span class="nem"><b>{{artist.name ? artist.name : 'None' | titlecase}}</b> / <b>
+                                {{artist.mobile ? artist.mobile : 'None'}}</b> /<a href="mailto:{{artist.email}}">
+                                {{artist.email ? artist.email : 'None'}}</a></span></p>
+                    <p class="bodyInfo">
+                        <span>{{'Age' | translate}} {{calculateAge()}}</span>
+                        <span>{{'Height' | translate}} {{artist.height ? artist.height : 'None'}}</span>
+                        <span>{{artist.agencyTitle ? artist.agencyTitle : 'None'}}</span>
+                        <span>{{artist.bodyType ? artist.bodyType + ' body' : 'None'}}</span>
+                    </p>
+                    <div>
+                        <p class="charsnew" *ngFor="let prop of artist.prop5Data">
+                            <span>{{prop?.prop5Name}} : {{prop?.textValue}}</span>
+                        </p>
+                    </div>
+                    <div class="ICO">
+                        <p>{{'Internal Comments Only' | translate}}:</p>
+                        <p class="ml-2">{{artist.internalComments ? artist.internalComments : 'None'}}</p>
+                    </div>
+                    <div class="form-group comments">
+                        <mat-form-field class="w-50 mr-3">
+                            <textarea matInput [placeholder]="'Remarks' | translate" [(ngModel)]="remarksForAll"
+                                (ngModelChange)="sendMessageToParent()"></textarea>
+                        </mat-form-field>
+                        <mat-form-field class="w-50">
+                            <textarea matInput [placeholder]="'Add external link if any' | translate"
+                                [(ngModel)]="externalLink" (ngModelChange)="getExternalLink()"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex;">
+                        <div class="form-group  mr-3" *ngIf="artist?.artistVideos.length > 0">
+                            <mat-form-field>
+                                <mat-select [placeholder]="'Show or' | translate">
+                                    <mat-option *ngFor="let video of artist?.artistVideos" [value]="video.html">
+                                        {{video.title}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <mat-form-field class="full-wid">
+                                <textarea matInput placeholder="Add external link if any" [(ngModel)]="externalLink"
+                                    (ngModelChange)="getExternalLink()"></textarea>
+                            </mat-form-field>
+                        </div> -->
+                        <div class="form-group editBtns">
+                            <button mat-raised-button class="mr-3" color="primary"
+                                [routerLink]="['/dashboard/playerupdate']"
+                                [queryParams]="{ id:artist.id , tab:3}">{{'EditPhoto' | translate}}</button>
+                            <button mat-raised-button class="mr-3" color="accent"
+                                [routerLink]="['/dashboard/playerupdate']"
+                                [queryParams]="{ id:artist.id , tab:1}">{{'EditFeatures' | translate}}</button>
+                            <button mat-raised-button class="mr-3" color="warn"
+                                [routerLink]="['/dashboard/playerupdate']"
+                                [queryParams]="{ id:artist.id , tab:0}">{{'EditDetails' | translate}}</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <button mat-icon-button (click)="artist.isSelected = !artist.isSelected">
+                <mat-icon *ngIf="!artist.isSelected">add</mat-icon>
+                <mat-icon *ngIf="artist.isSelected">close</mat-icon>
+            </button> -->

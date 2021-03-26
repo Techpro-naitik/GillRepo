@@ -1,0 +1,25 @@
+.textImage{
+    margin: 5px 0px 10px;
+    padding: 9px;
+    height: 200px;
+    width: 250px;
+}
+.uploadbtn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+.uploadbtn p{
+    float: right;
+    margin-left: 10px;
+    margin-top: 3px;
+}  
+ 
+  .uploadbtn input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }

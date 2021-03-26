@@ -1,0 +1,24 @@
+mat-dialog-content{
+    height: 343px;
+    /* width: 600px */
+}
+
+/* .mat-dialog-container{
+    width:800px !important;
+} */
+
+.physicTable tr td:nth-child(1){
+    width:17%;
+}
+.physicTable mat-checkbox{
+    font-size:14px !important;
+}
+.physicTable tr td:nth-child(1) p{
+    font-size:14px;
+}
+
+.physicTable mat-chip{
+    width:130px;
+    margin-top: 10px;
+    margin-right: 10px;
+}

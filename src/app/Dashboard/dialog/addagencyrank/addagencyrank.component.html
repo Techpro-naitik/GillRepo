@@ -1,0 +1,39 @@
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class=" app-card search-row-wrapper" style="position: relative;">
+        <mat-card>
+            <h1 mat-dialog-title *ngIf="data">{{'Update Agency Rank' | translate}}</h1>
+            <h1 mat-dialog-title *ngIf="!data">{{'Add agency rank' | translate}}</h1>
+            <div class="card-content-content">
+                <!-- <button type="submit" class="btn btn-primary mat-raised-button mat-button-base mat-accent"
+                    (click)="backtolist()">Back To list</button> -->
+                <form [formGroup]="rankForm">
+                    <div>
+                        <mat-form-field class="form-group">
+                            <input matInput formControlName="rank" [placeholder]="'Rank' | translate" autocomplete="off"
+                                maxlength="3">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="form-group">
+                            <input matInput type="color" formControlName="color"
+                                [value]="rankForm?.controls.color.value" [placeholder]="'Color Code' | translate"
+                                autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="form-group">
+                            <input matInput type="text" formControlName="color" [value]="rankForm?.controls.color.value"
+                                autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                </form>
+                <button *ngIf="!data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="closeDialog()">{{'Add' | translate}}</button>
+                <button *ngIf="data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="closeDialog()">{{'Update' | translate}}</button>
+                <button mat-button [mat-dialog-close] style="background-color:#dddddd;"
+                    class="btn ml-3">{{'Cancel' | translate}}</button>
+            </div>
+        </mat-card>
+    </div>
+</div>

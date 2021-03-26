@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Additional Capabilities</h1>
+<form>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Skills" aria-label="Skills" [matAutocomplete]="auto" [formControl]="skillsCtrl">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getSelected($event.option.value)">
+            <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill.prop5Name">
+                <span>{{skill.prop5Name}}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="mt-5">
+        <h4>Selected Skills: {{selectedSkills.length}}</h4>
+        <div *ngFor="let skills of selectedSkills; let i = index;" style="display: flex;">
+            <span>{{skills.prop5Name}}</span>
+            <mat-form-field>
+                <mat-select placeholder="Select" multiple>
+                    <mat-option *ngFor="let option of skills.options" [value]="option.id">{{option.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-icon-button (click)="removeItem(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+        </div>
+    </div>
+</form>

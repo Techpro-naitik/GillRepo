@@ -1,0 +1,158 @@
+<mat-card>
+    <button type="button" (click)="refreshList()" class="btn btn-primary mat-raised-button mat-button-base mat-primary">
+        {{'Refresh' | translate}}
+    </button>
+
+    <button type="button" [routerLink]="['/dashboard/addmessage']"
+        class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">
+        {{'Add Message' | translate}}
+    </button>
+    <div class="form-group mb-3">
+        <mat-label class="mr-4">{{'Search for a Message' | translate}}</mat-label>
+
+        <button (click)="toggleShow()" type="button" class="mat-flat-button mat-button-base mat-primary mt-4"
+            style="font-size:13px;font-weight:500; background-color:#e8a34a;">
+            <span *ngIf="isShown">-</span><span *ngIf="!isShown">+</span></button>
+        <div class="row container-fluid" id="divshow" [ngStyle]="{display: isShown === true? 'block' : 'none'}">
+            <button class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-2 mt-2"
+                (click)="toggleShow1()" type="button"> {{'Add text search' | translate}}
+            </button>
+            <button class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2 mt-2"
+                (click)="resetFilters()" type="button"> {{'Clear filters' | translate}}
+            </button>
+
+            <div class="mt-3" *ngIf="isShown1">
+                <mat-select class="form-control mr-3" style="width: 13%;" #word placeholder="Select"
+                    [(ngModel)]="defSelect">
+                    <mat-option [value]=1>{{'At least one word' | translate}}</mat-option>
+                    <mat-option [value]=2>{{'Expression' | translate}}</mat-option>
+                </mat-select>
+
+                <input class="form-control mr-3" type="text" #txt [(ngModel)]="searchMessage.text" />
+                {{'will be in' | translate}}
+                <mat-select class="form-control ml-2" style="width: 7%;" #texttype [placeholder]="'Select' | translate"
+                    (ngModelChange)="searchMessage.texttype = texttype.value" [(ngModel)]="searchMessage.texttype">
+                    <mat-option [value]=1>{{'Name' | translate}}</mat-option>
+                    <mat-option [value]=2>{{'Title' | translate}}</mat-option>
+                    <mat-option [value]=3>{{'Content' | translate}}</mat-option>
+                </mat-select>
+            </div>
+
+            <form [formGroup]="myForm">
+                <div class="form-group">
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Direction' | translate" formControlName="direction">
+                                <mat-option value=0>{{'To an actor' | translate}}</mat-option>
+                                <mat-option value=1>{{'From an Actor' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <input matInput [matDatepicker]="picker2" formControlName='before'
+                                [placeholder]="'Sent Before' | translate" autocomplete="Before">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <input matInput [matDatepicker]="picker1" formControlName='after'
+                                [placeholder]="'Sent After' | translate" autocomplete="After">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Message type' | translate" formControlName="messageType">
+                                <mat-option *ngFor="let option of allMessageTypes" [value]="option.id">
+                                    {{option?.typeName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Read' | translate" formControlName="read">
+                                <mat-option value=0>{{'No' | translate}}</mat-option>
+                                <mat-option value=1>{{'Yes' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Disabled' | translate" formControlName="disabled">
+                                <mat-option value=0>{{'No' | translate}}</mat-option>
+                                <mat-option value=1>{{'Yes' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Read once' | translate" formControlName="readOnce">
+                                <mat-option value=0>{{'No' | translate}}</mat-option>
+                                <mat-option value=1>{{'Yes' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mt-3" style="width: 50%">
+                        <mat-form-field class="full-wid">
+                            <mat-select [placeholder]="'Sent as email' | translate" formControlName="email">
+                                <mat-option value=0>{{'No' | translate}}</mat-option>
+                                <mat-option value=1>{{'Yes' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <button type="button" (click)="searchForMessage()"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-primary">{{'Submit' | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container" #previewDiv>
+        <div class="left">
+            <table>
+                <tr *ngFor="let message of allMessagesList; let i = index;">
+                    <td class="msg">
+                        <!-- <mat-checkbox class="mr-2"></mat-checkbox> -->
+                        <a *ngIf="innerWidth > 700"
+                            (click)="openPreview(message, i, previewDiv)">{{message.creationDate | date}} To
+                            {{message.firstName | titlecase}} {{message.lastName | titlecase}} |
+                            {{message.title | slice:0:75}}</a>
+                        <a *ngIf="innerWidth <= 700"
+                            (click)="openPreviewForMobile(message, i)">{{message.creationDate | date}}
+                            To {{message.firstName | titlecase}} {{message.lastName | titlecase}} |
+                            {{message.title | slice:0:75}}</a>
+                        <!-- </td>
+                    <td> -->
+                        <div class="box-style" *ngIf="message && message?.openPreview && innerWidth <= 700">
+                            <app-preview [data]="message"></app-preview>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- <div class="right box-style" *ngIf="showHidePreview && messageData.data && innerWidth > 700" #previewDiv>
+            <app-preview [data]="messageData.data"></app-preview>
+        </div> -->
+        <div class="right box-style" [ngStyle]="{'display': checkForDisplay() ? 'block' : 'none'}">
+            <app-preview *ngIf="showHidePreview && messageData.data && innerWidth > 700" [data]="messageData.data">
+            </app-preview>
+        </div>
+    </div>
+    <div class="bottomRight">
+        <mat-form-field>
+            <mat-select [placeholder]="'Page Number' | translate" [(ngModel)]="query.pageNumber" (ngModelChange)="fetchRecords()">
+                <mat-option *ngFor="let page of pageNumbers" [value]="page">{{page}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</mat-card>

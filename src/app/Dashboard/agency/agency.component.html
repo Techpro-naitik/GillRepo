@@ -1,0 +1,70 @@
+<!-- <div class="app-card-title mb-4">
+   <anglo-title-component title="Search Row"></anglo-title-component> 
+</div> -->
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-content p-2">
+            <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                (click)="insertAgency()">{{'Add Agency' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                routerLink="/dashboard/AgencyRank">{{'Go to Agency Rank' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                (click)="refreshList()">{{'Refresh' | translate}}
+            </button>
+        </div>
+        <div class="table-responsive overflow-hidden">
+            <div class="form-field mt-2">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'Search' | translate">
+                </mat-form-field>
+            </div>
+            <table style="box-shadow:none !important;" #table mat-table [dataSource]="dataSource" matSort
+                matSortDirection="asc" matSortDisableClear class="mat-elevation-z8 full-wid">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(element) : null"
+                            [checked]="selection.isSelected(element)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Name' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"><span
+                            [ngStyle]="{'color': element.agencyColor}">{{element.name}}</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Values">
+                    <th mat-header-cell *matHeaderCellDef>{{'Action' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon class="icon-color editBtn" (click)="updatevalues(element.id)" style="cursor:pointer">
+                            edit
+                        </mat-icon>
+                        <mat-icon class="icon-color dltBtn" (click)="openDialog('Delete',element)">delete</mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+
+            </table>
+            <div>
+                <button type="button" (click)="deleteAllSelected()"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-warn pull-right mt-2">{{'Delete Selected' | translate}}
+                </button>
+            </div>
+        </div>
+        <!-- <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25]"></mat-paginator> -->
+
+    </mat-card>
+</div>

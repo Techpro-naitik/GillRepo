@@ -1,0 +1,47 @@
+form mat-form-field{
+    display: block;
+    width: 16%;
+}
+
+.artistTable{
+    width: 45%;
+    margin-top: 20px;
+    overflow-y: auto;
+    height: 250px;
+}
+
+table{
+    text-align: center;
+}
+@media(max-width:500px){
+    form mat-form-field{
+        display: block;
+        width: 100%;
+    }
+    .artistTable{
+        width: 100%;
+        margin-top: 20px;
+        overflow-y: auto;
+        height: 250px;
+    }
+}
+
+/* @media(max-width:500px){
+    .artistTable{
+        width: 100%;
+        margin-top: 20px;
+    }
+} */
+
+@media(max-width:1279px){
+    .artistTable{
+        width: unset;
+        margin-top: 20px;
+        overflow-y: auto;
+        height: 250px;
+    }
+    form mat-form-field{
+        display: block;
+        width: 100%;
+    }
+}

@@ -1,0 +1,81 @@
+<div class="app-card-title mb-4">
+    <!-- <anglo-title-component title="Search Row"></anglo-title-component> -->
+</div>
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+
+        <div class="card-content p-2">
+            <div class="a-card-title" fxLayoutAlign="space-between center">
+
+                <div class="form-field">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'Search' | translate">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="table-responsive overflow-hidden">
+                <table #table mat-table [dataSource]="dataSource" matSort matSortDirection="asc" matSortDisableClear
+                    class="mat-elevation-z8 full-wid shelfInquiry">
+
+                    <ng-container matColumnDef="id">
+
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Sno'|translate}}</th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'FirstName'|translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'LastName'|translate}}</th>
+                        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="phone">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Phone'|translate}}</th>
+                        <td mat-cell *matCellDef="let element"> {{element.phone }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Email'|translate}}</th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Gender'|translate}}</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.gender === 1 ? 'M' : element.gender === 0 ? 'F' : '-'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="descrp">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Description'|translate}}</th>
+                        <td mat-cell *matCellDef="let element"> {{element.descrp ? element.descrp : '-'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="birthDay">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'D.o.b'|translate}}</th>
+                        <td mat-cell *matCellDef="let element"> {{element.birthDay | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>{{'Action'|translate}}</th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-icon class="icon-color editBtn" [routerLink]="['/dashboard/playerupdate/']"
+                                [queryParams]="{ id :element.id}">edit</mat-icon>
+
+                            <mat-icon class="icon-color dltBtn" (click)="openDialog('Delete',element)">delete</mat-icon>
+                            <mat-icon class="icon-color handleBtn" (click)="handleProfile(element.id)">visibility</mat-icon>
+                        </td>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+                </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+        </div>
+    </mat-card>
+</div>

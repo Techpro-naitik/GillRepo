@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{'Message Preview' | translate}}</h1>
+<mat-dialog-content>
+    <div class="top">
+        <b>{{'Sent on' | translate}}:</b> {{data.creationDate | date}} <b>{{'Sent to' | translate}}:</b> {{data.firstName}} {{data.lastName}} <b>{{'Read
+            on' | translate}}:</b>
+        {{data.readDate ? data.readDate : '-'}} <b>{{'Message type' | translate}}:</b>
+        {{data.msgtypename}} | <mat-icon class="editBtn" [routerLink]="['/dashboard/addmessage/', data.id]">edit
+        </mat-icon>
+    </div>
+    <div class="second">
+        <b>{{'Subject' | translate}}: </b>{{getTitle(data.title) | titlecase}}
+    </div>
+    <div>
+        <div [innerHTML]="getHTML(data.body)"></div>
+    </div>
+
+</mat-dialog-content>

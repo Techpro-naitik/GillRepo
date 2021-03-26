@@ -1,0 +1,94 @@
+<mat-card>
+    <div>
+        <div style="display: flex;">
+            <div>
+                <form [formGroup]="changeArtist">
+                    <mat-form-field class="mr-3">
+                        <mat-select [placeholder]="'Add artist' | translate" formControlName="ApplicationPartId">
+                            <mat-option *ngFor="let artist of otherArtists" [value]="artist.applicationPartId">
+                                {{artist.artistFirstName | titlecase}}
+                                {{artist.artistLastName  | titlecase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="mr-3">
+                        <input matInput [placeholder]="'Order' | translate" formControlName="ord">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                            cdkAutosizeMaxRows="5" matInput [placeholder]="'Remarks' | translate"
+                            formControlName="title"></textarea>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                        cdkAutosizeMaxRows="5" matInput [placeholder]="'Bulk Comments for all' | translate" #abc
+                        value="Mirroring - Copy of your details sent to caster"></textarea>
+                </mat-form-field>
+
+                <button (click)="setComments(abc.value)" type="button"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">
+                    {{'Set for all' | translate}}</button>
+            </div>
+        </div>
+
+        <hr style="border: 1px solid darkgrey;">
+
+        <div style="margin-top: 20px;">
+            <table style="text-align: center;">
+                <tr>
+                    <th>{{'Delete' | translate}}</th>
+                    <th>{{'Name' | translate}}</th>
+                    <th>{{'Image' | translate}}</th>
+                    <th>{{'Order' | translate}}</th>
+                    <th>{{'Remarks' | translate}}</th>
+                    <th>{{'Comments to caster' | translate}}</th>
+                </tr>
+                <tr *ngFor="let artist of artistsArray;">
+                    <td>
+                        <mat-checkbox (change)="toogleSelect(artist)" [checked]="artist.isSelected"></mat-checkbox>
+                    </td>
+                    <td><a [routerLink]="['/dashboard/playerupdate']"
+                            [queryParams]="{ id:artist.artistId , tab:0}">{{artist.artistFirstName}}
+                            {{artist.artistLastName}}</a></td>
+                    <td>
+                        <img *ngIf="!artist.fileName" src="../../../assets/image/defaultprofile.png" height="150px"
+                            width="150px">
+                        <img *ngIf="artist.fileName"
+                            src="http://shalashapi.azurewebsites.net/Uploads/{{artist.fileName}}" height="150px"
+                            width="150px">
+                    </td>
+                    <td><input type="number" [(ngModel)]="artist.order"></td>
+                    <td>
+                        <mat-form-field>
+                            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="5" matInput [(ngModel)]="artist.title"></textarea>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="5" matInput [(ngModel)]="artist.description"></textarea>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="mt-3">
+                <mat-form-field *ngIf="artistsArray?.length > 0">
+                    <mat-select [placeholder]="'Page Number' | translate" [(ngModel)]="pageNumber"
+                        (ngModelChange)="getArtists()">
+                        <mat-option *ngFor="let num of pageNumbers" [value]="num">{{num}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="ml-3"
+                    (click)="saveChanges()">{{'Save' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</mat-card>

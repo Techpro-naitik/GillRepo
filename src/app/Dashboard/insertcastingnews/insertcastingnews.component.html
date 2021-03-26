@@ -1,0 +1,39 @@
+<mat-card>
+    <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary" color="primary"
+        (click)="newscasting()"> {{'Go to list' | translate}}</button>
+
+    <form [formGroup]="castingForm" #castForm="ngForm">
+        <div class="form-group">
+            <div class=" ckeditor-wrapper">
+                <div fxlayout="row">
+                    <div class="card-title mt-4" fxlayout="column">
+                        <h5 style="margin-bottom:0px;margin-left: 5px;">{{'Content' | translate}}</h5>
+                    </div>
+                </div>
+                <div class="card-content p-2">
+                    <ckeditor name="editor1" type="classic" formControlName="body">
+                    </ckeditor>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="ml-2">
+                <mat-select [placeholder]="'Hide' | translate" formControlName="disabled">
+                    <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                    <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="ml-2">
+                <input matInput [placeholder]="'Order' | translate" formControlName="ord" autocomplete="ord">
+            </mat-form-field>
+        </div>
+        <div style="margin-bottom: 50px;">
+            <button *ngIf="castingNewsId" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                (click)="editCasting()">{{'Update' | translate}}</button>
+            <button *ngIf="!castingNewsId" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                (click)="addCasting()">{{'Add' | translate}}</button>
+        </div>
+    </form>
+</mat-card>

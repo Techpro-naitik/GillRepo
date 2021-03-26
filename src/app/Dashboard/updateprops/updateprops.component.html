@@ -1,0 +1,68 @@
+<h1 *ngIf="data" mat-dialog-title>{{'Update' | translate}}</h1>
+<h1 *ngIf="!data" mat-dialog-title>{{'Add Capabilities' | translate}}</h1>
+<div>
+    <button class="buttonClose" [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class=" app-card search-row-wrapper" style="position: inherit;">
+        <mat-card>
+
+            <div class="card-content-content">
+
+                <form [formGroup]="updateProp5value">
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="name" [placeholder]="'Name' | translate">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="catName" [placeholder]="'Category Name' | translate">
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val1" [placeholder]="('Text' | translate) + '1'">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val2" [placeholder]="('Text' | translate) + '2'">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val3" [placeholder]="('Text' | translate) + '3'">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val4" [placeholder]="('Text' | translate) + '4'">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val5" [placeholder]="('Text' | translate) + '5'">
+                        </mat-form-field>
+                    </div>
+
+                    <button *ngIf="data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                        (click)="editPropsValue()" cdkFocusInitial>{{'Update' | translate}}</button>
+                    <button *ngIf="!data" class="btn btn-primary mat-raised-button mat-button-base mat-warn ml-2"
+                        (click)="addPropsValue()" cdkFocusInitial>{{'Add' | translate}}</button>
+                    <button mat-button [mat-dialog-close] style="background-color:#dddddd;"
+                        class="btn ml-3">{{'Cancel' | translate}}</button>
+                </form>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

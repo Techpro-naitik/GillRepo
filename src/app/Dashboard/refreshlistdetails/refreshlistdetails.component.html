@@ -1,0 +1,69 @@
+<div class="app-card card-wrapper basic-table-wrapper mb-3">
+    <mat-card>
+        <div class="card-content p-2">
+            <div class="overflow-hidden">
+                <div class="table-responsive">
+                    <table *ngIf="data" class="table" style=" border-collapse: collapse;">
+
+                        <tbody>
+                            <tr>
+                                <td>Since when</td>
+                                <td>{{data?.created | date}}</td>
+
+                            </tr>
+                            <tr>
+
+                                <td>You first viewed this post on</td>
+                                <td>{{data?.viewed | date}}</td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Marked as done on</td>
+                                <td>-</td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Title</td>
+                                <td>New content for {{data?.title}}</td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Content</td>
+                                <td>-</td>
+
+                            </tr>
+                            <tr>
+                                <td><button *ngIf="data.completed == 0" type="button"
+                                        (click)="markCompletedUncompleted(1)"
+                                        class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1">Mark
+                                        completed</button>
+                                    <button *ngIf="data.completed == 1" type="button"
+                                        (click)="markCompletedUncompleted(0)"
+                                        class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1">Mark
+                                        Uncompleted</button>
+                                    <button type="button" *ngIf="data.markAsUnread == 0" (click)="markAsReadUnread(1)"
+                                        class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1">Mark
+                                        read </button>
+                                    <button type="button" *ngIf="data.markAsUnread == 1" (click)="markAsReadUnread(0)"
+                                        class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1">Mark
+                                        Unread </button>
+                                </td>
+                                <td><button type="button"
+                                        class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1"
+                                        (click)="deleteNotification(data?.dataId)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <p *ngIf="!data">No data found !</p>
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+</div>

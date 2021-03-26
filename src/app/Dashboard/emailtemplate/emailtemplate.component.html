@@ -1,0 +1,90 @@
+<mat-dialog-content class="mat-typography">
+    <h1 mat-dialog-title>{{'Preview' | translate}}</h1>
+    <div id="header">
+        <div style="font-family:Arial;font-size:11px;color:#999999;text-align:center;margin:10px auto;direction:rtl;">
+            {{'Sent to' | translate}} - {{email}}</div>
+        <div style="margin:10px auto;text-align:center;clear:both;">
+            <img src="http://www.shalash.org.il/images/logo4.png" />
+            <br>
+            <div style="margin:10px 0px;	text-align:right;direction:rtl;font-size:16px;">
+                <p [innerHTML]="emailBody"></p>
+                <BR>
+            </div>
+        </div>
+    </div>
+    <div id="middle">
+        <div id="actors" style="margin:0 auto;">
+            <div *ngFor="let artist of searchResults; let ind = index;" [id]="ind + 1"
+                style="background-color:#f8f8f8;border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1;padding:5px 0px;margin-bottom:3px;height:205px;">
+                <div style="text-align:right;float:right;">
+                    <img *ngFor="let img of artist?.imagesToDisplay" width="148px" height="203px"
+                        style="margin-left:1px;width:148px;height:203px;margin-right: 5px;"
+                        src="http://shalashapi.azurewebsites.net/Uploads/{{img}}">
+                </div>
+                <div style="float:right;">
+                    <div class="artist_specs"
+                        style="height:80px;margin:10px;color:#000000;line-height:20px;width:509px;padding:0px 10px;font-size:16px;">
+                        <div style="margin-bottom:5px;font-size:18px;font-weight:bold;text-align:right;"
+                            *ngIf="canShow(8)">
+                            {{artist.name}} <span *ngIf="canShow(11)">/ <a style="color: blue;"
+                                    href="{{'tel:' + artist.mobile}}"><u>{{artist.mobile}}</u></a></span>
+                        </div>
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(6)">
+                            {{'age' | translate}} {{artist.ageCount}} </div>
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(7)">
+                            {{'Height' | translate}} {{artist.height}} </div>
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(5)">
+                            {{'Agency' | translate}} {{artist.agencyTitle}}</div>
+
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(0)">
+                            {{'Body type' | translate}} {{artist.bodyType}}</div>
+
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(1)">
+                            {{'Eyes' | translate}} {{artist.eyes}}</div>
+
+                        <div style="clear:both"></div>
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(2)">
+                            {{'Hair' | translate}} {{artist.hair}}</div>
+
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(3)">
+                            {{'HairType' | translate}} {{artist.hairType}}</div>
+
+                        <div style="float:right;padding:0px 2px;color:#000000;margin-left:10px;margin-bottom:10px;background-color:#adadad;"
+                            *ngIf="canShow(4)">
+                            {{'Skin' | translate}} {{artist.skinTone}}</div>
+
+                    </div>
+                    <div style='clear:both'></div><BR>
+                    <div style="text-align:right;line-height:20px;margin-right:20px;width:509px;" *ngIf="canShow(9)">
+                        {{artist.messageForEmail ? artist.messageForEmail : ''}}</div>
+                    <div style="text-align: center;">
+                        <span *ngIf="canShow(10) && artist.externalLink"> <a style="color: blue;"
+                                href="{{'http://'+ artist.externalLink}}"><u>שואוריל</u></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div style="text-align:right;margin:10px 0px;" id="footer">
+        {{'thanks' | translate}}
+        <BR>
+        <BR> {{'teamName' | translate}}
+        <div style="font-family:Arial;font-size:12px;direction:rtl;text-align:right;margin:10px;">
+            *{{'securityNote' | translate}}</div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()" cdkFocusInitial>{{'Cancel' | translate}}</button>
+    <button mat-button (click)="makeFile()">{{'Generate Files' | translate}}</button>
+    <!-- <button mat-button (click)="check12()">check</button> -->
+</mat-dialog-actions>

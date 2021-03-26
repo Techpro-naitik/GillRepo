@@ -1,0 +1,6 @@
+.modalboxForm .form-group{
+    padding-bottom:1.25rem;
+}
+.modalboxForm .form-group:nth-child(2),.modalboxForm .form-group:nth-child(1){
+    padding-bottom:0px !important; 
+}

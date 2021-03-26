@@ -1,0 +1,268 @@
+.profileCard{
+    border: 1px solid #eeeeee;
+    width: 80%;
+    border-radius: 3px;
+    padding: 10px !important;
+    box-shadow: 0 0 9px 1px #dbdbdb;
+}
+.profileCard .contentProfile{
+    width:80%;
+}
+.nem{
+    font-size:14px;
+}
+.nem a{
+    color:blue;
+}
+.bodyInfo span{
+    margin-right: 5px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 11px;
+    border-radius: 2px;
+    border: 1px solid #dddddd;
+    display: inline-block;
+    margin-top:2px;
+}
+.charsnew span{
+    margin-right: 5px;
+    margin-top: 8px;
+    background: linear-gradient(90deg, #0081dc, #2a93e9) !important;
+    border: 1px solid #2078b1;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    display: inline-block;
+}
+.ICO p{
+    font-size:14px;
+}
+.ICO p:last-child{
+    color:#c62828;
+    font-weight:600;
+
+}
+.editBtns{
+    margin-bottom:15px;
+}
+.flexBox{
+    display: flex;
+}
+.flexBox .leftBox{
+    width:33%;
+}
+.centerLine{
+    border: 2px solid #dddddd;
+    padding: 0px;
+    margin: 0 10px;
+}
+.flexBox .rightBox{
+    width:63%;
+}
+@media(max-width:600px){
+    .flexBox{
+        display: block;
+    }
+    .centerLine{
+        display: none;
+    }
+    .flexBox .leftBox{
+        width:100%;
+       
+    }
+    .rightBox mat-card{
+        padding:0px;
+    }
+    .flexBox .rightBox{
+        width:100%;
+        border-left:none;
+        margin-left:0px;
+     color:blue
+    }  
+    .physicTable tr td{
+        border-bottom: 1px solid #dddddd;
+    }
+}
+
+.physicTable tr td:nth-child(1){
+    width:17%;
+}
+.physicTable mat-checkbox{
+    font-size:14px !important;
+}
+.physicTable tr td:nth-child(1) p{
+    font-size:14px;
+}
+
+.physicTable mat-chip{
+    width:130px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+[dir=rtl].mat-form-field {
+    text-align: right !important;
+}
+@media(min-width:400px) and (max-width:530px){
+    .ageHeight{
+        width:33%;
+    }
+}
+@media(max-width:399px){
+    .ageHeight{
+        display:block;
+        width:100%;
+        margin-left:0px !important;
+    }
+    .searchbesidego{
+        margin-left:25px !important;
+        width:150px !important;
+    }      
+    .searchbesidego:nth-child(2){
+        width:139px !important;
+    }      
+}
+@media(max-width:500px){
+    .filterDropdown mat-form-field{
+        width:100% !important;
+    }
+}
+@media(max-width:420px){
+    .profileCard{
+        width:auto !important;
+    }
+    .profileCardGrandSon{
+        display:block !important;
+    }
+    .profileCard .profileCardGrandSon .imgDiv{
+        margin-right:0px !important;
+    }
+    .profileCardGrandSon img{
+        width:100% !important;
+    }
+    .profileCardGrandSon .contentProfile{
+        width:100% !important;
+        margin-left:0px !important;
+    }
+    .profileCardGrandSon .contentProfile .nem{
+        font-size: 14px;
+        margin-top: 8px;
+        display: block;
+    }    
+    .profileCardGrandSon .contentProfile .charsnew span,.profileCardGrandSon .contentProfile .bodyInfo span{
+        display: block;
+        margin-right:0px !important;
+    }
+    .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+    mat-form-field{
+        width:100% !important;
+    }
+    .searchbesidego{
+        margin-left:35px !important;
+        width:70% !important;
+    }
+
+}   
+@media(max-width:500px) and (min-width:465px){
+    .bodyInfo span{
+        display: inline-block !important;
+        margin: 0px 1px;
+        width: 42%;
+    }
+        .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+}
+@media(min-width:400px) and (max-width:460px){
+    .bodyInfo span,.charsnew span{
+        display: block !important;
+        margin: 2px 0px;
+        width: auto;
+    }
+        .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+}
+@media(max-width:992px){
+    .profileCard{
+        width:auto !important;
+    }
+}
+@media(max-width:500px){
+    .charsnew span{
+        display: block !important;
+        width:auto !important;
+        margin:2px 0;
+    }
+}
+@media(min-width:501px) and (max-width:800px){
+    .profileCardGrandSon{
+        display: block !important;
+    }
+    .profileCardGrandSon .imgDiv{
+        display:block;
+        width:100%;
+    }
+    .profileCardGrandSon .contentProfile{
+        margin-left:0 !important;
+        display:block;
+        width:100%;
+    }
+}
+.filterDropdown mat-form-field,.secondSelector mat-form-field{
+    margin-right:0px;
+    display: block !important;
+}
+h1{
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.artistD{
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.example-chip-list {
+  width: 100%;
+}
+
+.pagination{
+    display: inline-flex;
+}
+
+.checkBoxDiv{
+    padding: 15px;
+}
+
+.checkBoxDiv mat-checkbox{
+    margin-right: 10px;
+}
+
+.checkBoxDiv .agLabel .mat-checkbox-label{
+   background: red;
+}
+
+.refresh{
+    float: right;
+}

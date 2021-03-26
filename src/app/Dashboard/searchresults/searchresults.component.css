@@ -1,0 +1,199 @@
+.profileCard{
+    border: 1px solid #eeeeee;
+    width: 90%;
+    border-radius: 3px;
+    padding: 10px !important;
+    box-shadow: 0 0 9px 1px #dbdbdb;
+    /* height: 500px; */
+    /* margin-left: 75px; */
+    border: 1px solid blueviolet;
+}
+.profileCard .contentProfile{
+    width:100%;
+}
+
+.selectBtn{
+    margin-top: 10px;
+}
+
+.selectBtn mat-icon{
+    font-size: 35px;
+}
+
+.nem{
+    font-size:14px;
+}
+.nem a{
+    color:blue;
+}
+.bodyInfo span{
+    margin-right: 5px;
+    background-color: #f5f5f5;
+    padding: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 11px;
+    border-radius: 2px;
+    border: 1px solid #dddddd;
+    display: inline-block;
+    margin-top:2px;
+}
+.charsnew{
+    width: fit-content;
+    display: contents;
+}
+.charsnew span{
+    margin-right: 5px;
+    margin-top: 8px;
+    background: linear-gradient(90deg, #0081dc, #2a93e9) !important;
+    border: 1px solid #2078b1;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 10px;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.comments{
+    display: flex;
+}
+.ICO {
+    margin-top:10px;
+    display: flex;
+}
+.ICO p{
+    font-size:14px;
+}
+.ICO p:last-child{
+    color:#c62828;
+    font-weight:600;
+
+}
+.editBtns{
+    margin-bottom:0px;
+}
+
+@media(max-width:420px){
+    .profileCard{
+        width:auto !important;
+    }
+    .profileCardGrandSon{
+        display:block !important;
+    }
+    .profileCard .profileCardGrandSon .imgDiv{
+        margin-right:0px !important;
+    }
+    .profileCardGrandSon img{
+        width:100% !important;
+    }
+    .profileCardGrandSon .contentProfile{
+        width:100% !important;
+        margin-left:0px !important;
+    }
+    .profileCardGrandSon .contentProfile .nem{
+        font-size: 14px;
+        margin-top: 8px;
+        display: block;
+    }    
+    .profileCardGrandSon .contentProfile .charsnew span,.profileCardGrandSon .contentProfile .bodyInfo span{
+        display: block;
+        margin-right:0px !important;
+    }
+    .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+    mat-form-field{
+        width:100% !important;
+    }
+    .searchbesidego{
+        margin-left:35px !important;
+        width:70% !important;
+    }
+
+}   
+@media(max-width:500px) and (min-width:465px){
+    .bodyInfo span{
+        display: inline-block !important;
+        margin: 0px 1px;
+        width: 42%;
+    }
+        .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+}
+@media(min-width:400px) and (max-width:460px){
+    .bodyInfo span,.charsnew span{
+        display: block !important;
+        margin: 2px 0px;
+        width: auto;
+    }
+        .profileCardGrandSon .contentProfile .editBtns button{
+        font-size:10px !important;
+        margin-bottom:10px !important; 
+    }
+}
+@media(max-width:992px){
+    .profileCard{
+        width:auto !important;
+    }
+}
+@media(max-width:500px){
+    .charsnew span{
+        display: block !important;
+        width:auto !important;
+        margin:2px 0;
+    }
+}
+@media(min-width:501px) and (max-width:800px){
+    .profileCardGrandSon{
+        display: block !important;
+    }
+    .profileCardGrandSon .imgDiv{
+        display:block;
+        width:100%;
+    }
+    .profileCardGrandSon .contentProfile{
+        margin-left:0 !important;
+        display:block;
+        width:100%;
+    }
+}
+
+
+.profileCardGrandSon{
+    display:flex !important;
+}
+.profileCardGrandSon .imgDiv{
+    display:inline-block;
+}
+.profileCardGrandSon .imgDiv .imageparent{
+    display: inline-block;
+}
+
+.container{
+    display: flex;
+}
+
+.container .leftBox{
+    width: 5%;
+    /* border: 1px solid red; */
+    /* height: 500px; */
+}
+
+.container .rightBox{
+    border: 1px solid green;
+    min-width: 90%;
+    max-width: 90%;
+    height: auto;
+    /* overflow-y: auto; */
+    /* height: 500px; */
+}
+
+.container .leftBox .jobImg{
+    /* height: auto; */
+    max-width: 70%;
+    padding: 10px;
+}

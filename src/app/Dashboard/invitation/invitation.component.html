@@ -1,0 +1,117 @@
+<mat-card>
+    <mat-tab-group>
+        <mat-tab *ngFor="let tab of tabsArray; let tabIn = index;" #matTabRef>
+            <ng-template mat-tab-label>
+                <span [ngStyle]="{'color': matTabRef.isActive === true ? 'orangered' : '#1c94c4'}"
+                    style="display: contents;">
+                    <mat-icon *ngIf=" tab.icon">{{tab.icon}}</mat-icon>
+                    {{tab.title | translate | titlecase}} ({{tab?.data.length}})
+                </span>
+            </ng-template>
+            <div>
+                <div *ngIf="tabIn === 0">
+                    <table *ngIf="tab?.data.length > 0" class="table1">
+                        <tr *ngFor="let artist of tab?.data">
+                            <td>
+                                <mat-checkbox (change)="changeSelected(artist)" [checked]="artist.isSelected">
+                                </mat-checkbox> <a [routerLink]="['/dashboard/playerupdate']"
+                                    [queryParams]="{ id:artist.artistId , tab:0}">
+                                    <u>{{artist.firstName}} {{artist.lastName}}</u>
+                                </a>
+                            </td>
+                            <td>
+                                <img *ngIf="artist.fileName" width="100px" style="border: 1px solid red;"
+                                    src="http://shalashapi.azurewebsites.net/Uploads/{{artist.fileName}}">
+
+                                <img *ngIf="!artist.fileName" width="100px" style="border: 1px solid red;"
+                                    src="../../../assets/image/defaultprofile.png">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div *ngIf="tab?.data.length > 0" style="float: left; margin-top: 40px;">
+                        <button type="button" (click)="openConfirmation('Delete')"
+                            class="btn btn-primary mat-raised-button mat-button-base mat-warn pull-right mt-2">{{'Cancel Invitation' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="tabIn === 1">
+                    <table class="table2">
+                        <tr>
+                            <th>
+                                {{'Registration Paused' | translate}}
+                            </th>
+                            <th>
+                                {{'Actors' | translate}}
+                            </th>
+                            <th>
+                                {{'Edit Registration' | translate}}
+                            </th>
+                            <th>
+                                {{'Image' | translate}}
+                            </th>
+                        </tr>
+                        <tr *ngFor="let artist of tab?.data"
+                            [ngStyle]="{'color' : artist.disabled === 1 ? 'red' : 'black'}">
+                            <td>
+                                <mat-checkbox (change)="changeSelected(artist)" [checked]="artist.isSelected">
+                                </mat-checkbox>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/dashboard/playerupdate']"
+                                    [queryParams]="{ id:artist.artistId , tab:0}">
+                                    <u>{{artist.artistFirstName}} {{artist.artistLastName}}</u>
+                                </a> </td>
+                            <td>
+                                <u>{{'Edit a registration request' | translate}}</u>
+                            </td>
+                            <td>
+                                <img *ngIf="artist.fileName" width="100px" style="border: 1px solid red;"
+                                    src="http://shalashapi.azurewebsites.net/Uploads/{{artist.fileName}}">
+
+                                <img *ngIf="!artist.fileName" width="100px" style="border: 1px solid red;"
+                                    src="../../../assets/image/defaultprofile.png">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="mt-3" *ngIf="tab?.data.length > 0">
+                        <button type="button" *ngIf="tabIn === 1"
+                            class="btn btn-primary mat-raised-button mat-button-base mat-warn mr-2"
+                            (click)="pauseResumeSubscriptions(1,0)">{{'Pause Registrations' | translate}}
+                        </button>
+
+                        <button type="button" *ngIf="tabIn === 1"
+                            class="btn btn-primary mat-raised-button mat-button-base mat-warn"
+                            (click)="pauseResumeSubscriptions(0,1)">{{'Resume Registrations' | translate}}
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <p *ngIf="tabIn > 1 && tab.role === 'role'">
+                    {{'Part title' | translate}} : {{tab.title}}
+                </p>
+
+                <table *ngIf="tab?.data.length > 0 && tabIn > 1" class="table1">
+                    <tr *ngFor="let artist of getDataForDynamicRoles(tabIn)">
+                        <td>
+                            <a [routerLink]="['/dashboard/playerupdate']" [queryParams]="{ id:artist.artistId , tab:0}">
+                                <u>{{artist.artistFirstName}} {{artist.artistLastName}}</u>
+                            </a>
+                        </td>
+                        <td>
+                            <img *ngIf="artist.fileName" width="100px" style="border: 1px solid red;"
+                                src="http://shalashapi.azurewebsites.net/Uploads/{{artist.fileName}}">
+
+                            <img *ngIf="!artist.fileName" width="100px" style="border: 1px solid red;"
+                                src="../../../assets/image/defaultprofile.png">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

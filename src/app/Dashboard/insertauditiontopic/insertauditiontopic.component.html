@@ -1,0 +1,28 @@
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class=" app-card search-row-wrapper">
+        <button class=" buttonClose" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-card>
+            <h1 *ngIf="data" mat-dialog-title>{{'Update' | translate}} </h1>
+            <h1 *ngIf="!data" mat-dialog-title>{{'Add' | translate}}} </h1>
+
+
+            <div class="card-content-content">
+
+                <div class="form-group">
+                    <mat-form-field class="">
+                        <input matInput [formControl]="name" [placeholder]="'Name' | translate" autocomplete="name">
+                    </mat-form-field>
+                </div>
+                <button *ngIf="data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="EditAuditionTopic()">{{'Update' | translate}}</button>
+
+                <button *ngIf="!data" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                    (click)="addNewAuditionTopic()">{{'Add' | translate}}</button>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

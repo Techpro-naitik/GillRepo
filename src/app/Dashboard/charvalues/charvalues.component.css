@@ -1,0 +1,48 @@
+.editBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 2px;
+    padding: 2px;
+    color: #ffffff;
+    background: #339933;
+    cursor: pointer;
+}
+.dltBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 2px;
+    color: #ffffff;
+    background: #c62828;
+    margin-left:2px;
+}
+ .caster th:last-child{
+    width:104px !important;
+}     
+.buttonClose{
+    width: 20px;
+    right: 0;
+    position: absolute;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000000;
+    cursor:pointer;
+    border:none;
+    color: #ffffff;
+    text-align: center;
+    line-height: 22px;
+    z-index: 999999;
+    top: 8px;
+    right: 8px;
+}
+.buttonClose mat-icon{
+    font-size: 12px;
+    right: 8px;
+    vertical-align: middle;
+    top: 3px;
+    position: relative;
+
+}     

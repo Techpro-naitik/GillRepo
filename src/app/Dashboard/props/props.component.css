@@ -1,0 +1,25 @@
+.editBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 2px;
+    padding: 2px;
+    color: #ffffff;
+    background: #339933;
+    cursor: pointer;
+}
+.dltBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 2px;
+    color: #ffffff;
+    background: #c62828;
+    margin-left:2px;
+}
+.props th:last-child{
+    width: 100px !important;
+    display: table-cell;
+}

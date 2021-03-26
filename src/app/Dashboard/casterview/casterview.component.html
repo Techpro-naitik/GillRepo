@@ -1,0 +1,318 @@
+<mat-card>
+    <div>
+        <button class="btn btn-primary mat-raised-button mat-button-base mat-primary" mat-raised-button
+            [routerLink]="['/dashboard/auditions']">{{'Auditions List' | translate}}</button>
+    </div>
+
+    <form [formGroup]="casterForm" *ngIf="!hasCasterData" class="mt-3">
+        <mat-form-field>
+            <mat-select [placeholder]="'Submit to website' | translate" formControlName="useForSite">
+                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select [placeholder]="'Email' | translate" formControlName="useForMail">
+                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select [placeholder]="'Can caster edit' | translate" formControlName="casterCanEdit">
+                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [placeholder]="'Page title' | translate" formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" cdkAutosizeMaxRows="5"
+                matInput [placeholder]="'Description' | translate" formControlName="description"></textarea>
+        </mat-form-field>
+        <button class="btn btn-primary mat-raised-button mat-button-base mat-primary" mat-raised-button type="button"
+            (click)="submitDetails()">{{'Submit' | translate}}</button>
+    </form>
+
+    <mat-tab-group *ngIf="hasCasterData" class="mt-3">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                {{'Details' | translate}}
+            </ng-template>
+            <div style="display: flex;">
+                <div style="width: 25%;" class="mr-3">
+                    <form [formGroup]="casterUpdateForm">
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Show Agency' | translate" formControlName="showAgency">
+                                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Show Phone' | translate" formControlName="showPhone">
+                                <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Submit to website' | translate" formControlName="useForSite">
+                                <mat-option [value]="1">{{'Yes' | translate }}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Email' | translate" formControlName="useForMail">
+                                <mat-option [value]="1">{{'Yes' | translate }}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Can caster edit' | translate" formControlName="casterCanEdit">
+                                <mat-option [value]="1">{{'Yes' | translate }}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-select
+                                [placeholder]="'Finish Editing (will allow the caster to see the page)' | translate"
+                                formControlName="done">
+                                <mat-option [value]="1">{{'Yes' | translate }}</mat-option>
+                                <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" [placeholder]="'Website View Date' | translate"
+                                formControlName="viewedOnSiteDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker2" [placeholder]="'Date of Email' | translate"
+                                formControlName="sentByMailDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput [placeholder]="'Page title' | translate" formControlName="title">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="5" matInput [placeholder]="'Description' | translate"
+                                formControlName="description"></textarea>
+                        </mat-form-field>
+                        <button class="btn btn-primary mat-raised-button mat-button-base mat-primary" mat-raised-button
+                            type="button" (click)="updateCasterDetails()">{{'Update' | translate}}</button>
+                    </form>
+                </div>
+
+                <div style="width: 60%;" class="mt-3">
+                    <div style="margin-bottom: 20px; margin-left: 12px;">
+                        <!-- <span><b>Create an Initial view</b></span><br> -->
+                        <span>{{'Note! If you have already created pages for this auditions, they will be deleted if you enable this feature' | translate}}.</span>
+                    </div>
+                    <form class="pageForm" [formGroup]="pageForm">
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Separate roles to pages' | translate"
+                                formControlName="pseperateParts">
+                                <mat-option [value]="1">{{'Yes' | translate }}</mat-option>
+                                <!-- <mat-option [value]="0">No</mat-option> -->
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- <mat-form-field>
+                            <input matInput placeholder="Artists on Page" formControlName="ppageSize">
+                            <mat-hint>Leave blank if everyone is on the same page</mat-hint>
+                        </mat-form-field> -->
+
+                        <mat-form-field>
+                            <mat-select [placeholder]="'AutoFill comments to casting director' | translate"
+                                formControlName="pArtistTextId">
+                                <mat-option [value]="-1">{{'Without' | translate}}</mat-option>
+                                <mat-option [value]="0">{{'With text below' | translate}}</mat-option>
+                                <mat-option [value]="1">{{'comical' | translate}}</mat-option>
+                                <mat-option [value]="2">{{'musical' | translate}}</mat-option>
+                                <mat-option [value]="3">{{'drama' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="5" matInput [placeholder]="'Text for Comments' | translate"
+                                formControlName="pArtistText"></textarea>
+                        </mat-form-field>
+
+                        <button class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+                            mat-raised-button type="button"
+                            (click)="createPagesForRoles()">{{'Create Pages' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                {{'Pages' | translate}}
+            </ng-template>
+            <!-- <div>
+                <mat-form-field class="mr-3">
+                    <input matInput placeholder="Order">
+                </mat-form-field>
+
+                <mat-form-field class="mr-3">
+                    <input matInput placeholder="Title">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                        cdkAutosizeMaxRows="5" matInput placeholder="Description"></textarea>
+                </mat-form-field>
+            </div> -->
+
+            <div *ngIf="pagesArr?.length > 0" class="mt-3">
+                <table style="text-align: center;">
+                    <tr>
+                        <th>{{'Delete' | translate}}</th>
+                        <th>{{'Order' | translate}}</th>
+                        <th>{{'Title' | translate}}</th>
+                        <th>{{'Description' | translate}}</th>
+                        <th>{{'Actors' | translate}}</th>
+                    </tr>
+                    <tr *ngFor="let item of pagesArr">
+                        <td>
+                            <mat-checkbox (change)="toggleValue(item)" [checked]="item.isSelected"></mat-checkbox>
+                        </td>
+                        <td>
+                            <mat-form-field class="ml-2">
+                                <input matInput type="number" [(ngModel)]="item.order">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input matInput type="text" [(ngModel)]="item.title">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="item.description">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/dashboard/ViewArtists']" style="margin-left: 10px;"
+                                [queryParams]="{ casterViewPageId : item.id , auditionId : currentAuditionID}"><u>{{item.artistCount}}</u></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="pagesArr?.length > 0" class="mt-3">
+                <mat-form-field>
+                    <mat-select [placeholder]="'Page Number' | translate" [(ngModel)]="pageNumber">
+                        <mat-option *ngFor="let num of pageNumbers" [value]="num">{{num}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="ml-3"
+                    (click)="saveChanges()">{{'Save' | translate}}</button>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                {{'Preview' | translate}}
+            </ng-template>
+            <app-artistspreviewforcaster *ngIf="pagesArr?.length > 0 && artists?.length > 0" [pages]="pagesArr"
+                [artists]="artists" [flags]="{agency: canShowAgency, phone: canShowPhone}"
+                (handleTabs)="fetchTabs($event)">
+            </app-artistspreviewforcaster>
+        </mat-tab>
+
+        <mat-tab *ngIf="canCasterSee">
+            <ng-template mat-tab-label>
+                {{'Send To Caster' | translate}}
+            </ng-template>
+
+            <div style="float: right;" class="mt-3">
+                <button mat-raised-button color="primary" class="mt-2"
+                    (click)="generateFiles()">{{'Generate Files' | translate}}</button>
+            </div>
+
+            <div class="mt-3" style="width: 60%;">
+                <mat-form-field>
+                    <input type="text" matInput [placeholder]="'Caster Email' | translate"
+                        [(ngModel)]="dataForEmail.casterEmail">
+                </mat-form-field>
+                <mat-form-field class="ml-3">
+                    <input type="text" matInput [placeholder]="'Copy Email' | translate"
+                        [(ngModel)]="dataForEmail.copyEmail">
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="dataForEmail.RoleHtmlContent?.length > 0">
+                <p>{{'Pages to submit (Each page will be mailed separately)' | translate}} </p>
+
+                <table>
+                    <tr *ngFor="let page of dataForEmail.RoleHtmlContent; let i = index">
+                        <td>
+                            <mat-checkbox [checked]="page.isSelected" (change)="toggleValue(page)"></mat-checkbox>
+                        </td>
+                        <td>
+                            <a href="http://shalashapi.azurewebsites.net/MailVersions/cv_{{casterViewId}}_{{i}}.html"
+                                target="_blank"><u>{{'Page' | translate}} {{i+1}}</u></a>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input type="text" matInput [(ngModel)]="page.title"
+                                    [placeholder]="'Subject' | translate">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-checkbox (change)="mirrorEmails()"></mat-checkbox>
+                        </td>
+                        <td>{{'Mirroring' | translate}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- <div>
+                <mat-checkbox (change)="mirrorEmails()">Reflection</mat-checkbox>
+            </div> -->
+
+            <div *ngIf="dataForEmail.RoleHtmlContent?.length > 0">
+                <button mat-raised-button color="primary" class="mt-2"
+                    (click)="sendEmailToCastersAndArtists()">{{'Send Marked Pages' | translate}}</button>
+            </div>
+
+            <div *ngIf="artistsList.length > 0" class="mt-2">
+                <table>
+                    <tr *ngFor="let artist of artistsList; let j = index;">
+                        <td>
+                            <mat-checkbox (change)="toggleStatus(artist)" [checked]="artist.isSelected"></mat-checkbox>
+                        </td>
+                        <td><a href="http://shalashapi.azurewebsites.net/MailVersions/{{artist.path}}.html"
+                                target="_blank">
+                                <u>{{artist.firstName}} {{artist.lastName}} {{'registered for the role of' | translate}}
+                                    {{artist.partTitle}}</u></a></td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="dataForEmail.RoleHtmlContent?.length > 0">
+                <button mat-raised-button color="primary" class="mt-2" (click)="sendEmailToCastersAndArtists()">{{'Send Marked Pages' | translate}}</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-card>

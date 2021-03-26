@@ -1,0 +1,32 @@
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-title" style="margin-left: 25%;
+    font-size: 29px;
+    font-weight: bolder;">
+            {{'SMS Alerts to subscribers' | translate}}
+        </div>
+
+        <div class="card-content p-2">
+
+            <div>
+                <div *ngFor="let list of smsListsArray; let i = index;">
+                    <div [ngStyle]="{background: list.color}" class="inp-div mb-2">
+                        <div style="display: flex;">
+                            {{list.title | translate}} <p class="ml-2 pText">{{list.count}}</p>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" style="background-color: orange;"
+                                class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                                [routerLink]="['/dashboard/sendsms']"
+                                [queryParams]="{ list: list.linkText}">{{'Send SMS Message' | translate}}</button>
+
+                            <button type="button"
+                                class="btn btn-primary mat-raised-button mat-button-base mat-accent ml-2"
+                                (click)="getExcelForCase(i+1, list.linkText)">{{'Export to Excel' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

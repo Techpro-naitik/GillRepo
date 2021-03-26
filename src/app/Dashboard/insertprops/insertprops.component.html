@@ -1,0 +1,56 @@
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+    <div class="app-card">
+        <mat-card>
+
+            <div class="card-content-content">
+
+                <form [formGroup]="insertPropsValue" (ngSubmit)="insertprops()">
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="name" [placeholder]="'Name' | translate"
+                                autocomplete="name">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val1" [placeholder]="('Text' | translate) + '1'"
+                                autocomplete="val1">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val2" placeholder="val2text" autocomplete="val2">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val3" placeholder="val3text" autocomplete="val3">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val4" placeholder="val4text" autocomplete="val4">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput formControlName="val5" placeholder="val5text" autocomplete="val5">
+                        </mat-form-field>
+                    </div>
+
+
+                    <button type="submit"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">Add</button>
+
+
+                </form>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

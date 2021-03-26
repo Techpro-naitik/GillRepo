@@ -1,0 +1,48 @@
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-content p-2">
+            <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-2"
+                (click)="getAgencyRanks()">{{'Refresh' | translate}}
+            </button>
+
+            <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-2 ml-2"
+                (click)="openCreateDialog()">{{'Add agency rank' | translate}}
+            </button>
+        </div>
+        <div class="table-responsive overflow-hidden">
+            <table style="box-shadow:none !important;" #table mat-table [dataSource]="dataSource" matSort
+                matSortDirection="asc" matSortDisableClear class="mat-elevation-z8 full-wid">
+
+                <ng-container matColumnDef="rank">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Rank' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.rank}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Color Code' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"><b [ngStyle]="{'color': element.color}">{{element.color}}</b>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>{{'Action' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon class="icon-color editBtn" style="cursor:pointer" (click)="openCreateDialog(element)">
+                            edit
+                        </mat-icon>
+                        <mat-icon class="icon-color dltBtn" (click)="openConfirmation('Delete', element)">delete
+                        </mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+
+            </table>
+            <div>
+                <button type="button"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-warn pull-right mt-2">{{'Delete Selected' | translate}}
+                </button>
+            </div>
+        </div>
+    </mat-card>
+</div>

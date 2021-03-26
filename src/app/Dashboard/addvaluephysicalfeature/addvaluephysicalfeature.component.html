@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Add Characteristic Values</h1>
+<div>
+    <button class=" buttonClose"
+        [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered mt-3" mdbTable mdbTableScroll scrollX="true" maxWidth="400">
+        <thead>
+            <tr>
+                <th>Name a role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let field of fieldArray; let i = index">
+                <td>
+                    <input [(ngModel)]="field.name" ng-pattern="/^[a-zA-Z]$/" class="form-control" type="text"
+                        name="{{field.name}}" [ngModelOptions]="{standalone: true}" autocomplete="field.name" />
+                </td>
+
+                <td>
+                    <button class="btn mat-warn mat-raised-button mat-button-base  ml-2 mr-2" type="button"
+                        (click)="deleteFieldValue(i)">Delete</button>
+                </td>
+            </tr>
+
+            <button class="btn btn-primary mat-raised-button mat-button-base mat-accent ml-2 mr-2" type="button"
+                (click)="addFieldValue()">Add</button>
+
+            <button class="btn btn-primary mat-raised-button mat-button-base mat-accent ml-2 mr-2" type="button"
+                (click)="save()">Save</button>
+        </tbody>
+    </table>
+</div>

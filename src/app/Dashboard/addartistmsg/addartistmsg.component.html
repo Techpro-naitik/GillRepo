@@ -1,0 +1,126 @@
+<mat-card>
+
+    <button type="button" [routerLink]="['/dashboard/artistmsg']"
+        class="btn btn-primary mat-raised-button mat-button-base mat-primary mb-3">
+        {{'Go to list' | translate}}
+    </button>
+
+    <div style="margin-top: 10px; margin-bottom: 20px;" *ngIf="!currentMessageId">
+        <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+            (click)="openRecipinetsPage()">
+            {{'Add recipients' | translate}}
+        </button>
+
+        <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2"
+            (click)="resetFields()">
+            {{'Reset' | translate}}
+        </button>
+    </div>
+
+    <div class="form-group">
+        <div class="artistTable" *ngIf="artists?.length > 0">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>
+                        {{'FirstName' | translate}}
+                    </th>
+                    <th>
+                        {{'LastName' | translate}}
+                    </th>
+                </tr>
+                <tr *ngFor="let artist of artists">
+                    <td>
+                        <mat-checkbox [checked]="artist.isSelected" (change)="toggleVal(artist.artistId)">
+                        </mat-checkbox>
+                    </td>
+                    <td>{{artist.firstName}}</td>
+                    <td>{{artist.lastName}}</td>
+                </tr>
+            </table>
+            <!-- <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                (click)="checkVal()">
+                check
+            </button> -->
+        </div>
+        <form [formGroup]="addMessageForm" #msgForm="ngForm" (ngSubmit)="sendMessage()">
+
+            <mat-form-field *ngIf="currentMessageId">
+                <mat-select [placeholder]="'Disabled' | translate" formControlName="disabled">
+                    <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                    <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select [placeholder]="'One Time' | translate" formControlName="readOnce">
+                    <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                    <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="currentMessageId">
+                <mat-select [placeholder]="'Hidden' | translate" formControlName="hidden">
+                    <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                    <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select [placeholder]="'Add email to queue' | translate" formControlName="addToEmailQueue">
+                    <mat-option [value]="0">No</mat-option>
+                    <mat-option [value]="1">Yes</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div style="display: flex;">
+                <mat-form-field>
+                    <mat-select [placeholder]="'Message type' | translate" formControlName="title">
+                        <mat-option *ngFor="let option of allMessageTypes" [value]="option.id">
+                            {{option?.typeName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field style="margin-left: 30px; width: 40%;">
+                    <input matInput type="text" [placeholder]="'Subject' | translate" formControlName="secondTitle">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <p>{{'Message Body' | translate}}</p>
+                <!-- <ck-editor maxlength="5" name="editor1" skin="moono-lisa" language="en" [fullPage]="true"
+                    formControlName="body">
+                </ck-editor> -->
+                <ckeditor type="classic" formControlName="body"></ckeditor>
+                <!-- <ckeditor type="inline" formControlName="body"></ckeditor> -->
+                <!-- <ckeditor type="divarea" formControlName="body"></ckeditor> -->
+            </div>
+
+            <div *ngIf="!currentMessageId">
+                <button class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-3" type="button"
+                    (click)="openToAddFile()">{{'Add Files' | translate}}</button>
+
+                <div *ngIf="returnedFiles && returnedFiles?.length > 0" id="filesDiv" style="margin-top: 10px;">
+                    <h3>{{'Attached files' | translate}}</h3>
+                    <ul>
+                        <li *ngFor="let file of returnedFiles"><a
+                                href="http://shalashapi.azurewebsites.net/Uploads/{{file}}">{{file}}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 50px;">
+                <button *ngIf="!currentMessageId"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-3"
+                    type="submit">{{'send' | translate}}</button>
+                <button *ngIf="currentMessageId"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-3"
+                    type="submit">{{'Update' | translate}}</button>
+
+                <button *ngIf="currentMessageId"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-3" type="button"
+                    (click)="deleteMessage()">{{'Delete' | translate}}</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

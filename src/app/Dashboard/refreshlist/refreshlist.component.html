@@ -1,0 +1,97 @@
+<div class="app-card card-wrapper basic-table-wrapper mb-3">
+    <mat-card>
+        <div class="card-title mb-3 p-2">
+            <h3 class="title">{{'Refresh list'|translate}}</h3>
+        </div>
+        <form [formGroup]="testForm">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary mr-5 ml-1"
+                    (click)="performAction(testForm.controls.stype2.value)">
+                    Go</button>
+                <mat-form-field class="mr-5">
+                    <mat-select [placeholder]=" 'Filter type' | translate" formControlName="stype1" #filter
+                        (ngModelChange)="filterChange(filter.value)">
+                        <mat-option [value]="1">{{ 'Display not done' | translate}}</mat-option>
+                        <mat-option [value]="0">{{ 'Display all' | translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-select [placeholder]=" 'Action' | translate" formControlName="stype2">
+                        <!-- <mat-option [value]="0">Apply for marked:</mat-option> -->
+                        <mat-option [value]="1">{{'Delete' | translate}}</mat-option>
+                        <mat-option [value]="2">{{'Mark as read' | translate}}</mat-option>
+                        <mat-option value="3">{{'Mark as not done' | translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="card-content p-2">
+                <div class="overflow-hidden">
+                    <div class="table-responsive">
+                        <table class="table" style=" border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <mat-checkbox type="checkbox" [(ngModel)]="checkAll"
+                                            [ngModelOptions]="{standalone: true}" (change)="checkAllFunc($event)">
+                                        </mat-checkbox>
+                                    </th>
+                                    <th>{{'From Date' | translate}}</th>
+                                    <th>{{'Title' | translate}}</th>
+                                    <th>
+                                        {{'View' | translate}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let notifications of notificationData"
+                                    [ngStyle]=" {backgroundColor: notifications.completed === 0 ? 'pink':'lightgreen'}">
+                                    <th>
+                                        <mat-checkbox type="checkbox" (change)="checkChange(notifications)"
+                                            [checked]="notifications?.isSelected">
+                                        </mat-checkbox>
+                                    </th>
+                                    <td>{{notifications?.created | date}}</td>
+                                    <td>{{notifications?.title }}
+                                        <mat-label style="font-weight: 700;"
+                                            (click)="playerEdit(notifications?.artistId)">{{notifications?.artistName}}
+                                        </mat-label>
+                                    </td>
+                                    <td>
+                                        <button mat-icon-button
+                                            [routerLink]="['/dashboard/refreshlistdetails/', notifications?.dataId]">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <!-- <mat-paginator [length]="notificationData?.count" [pageSize]="query.pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="getUpdate($event)">
+                </mat-paginator> -->
+                <div class="form-group pull-right" *ngIf="notificationData?.length > 0">
+                    <mat-form-field class="mr-3">
+
+                        <mat-select [placeholder]="'Page Size' | translate" [(ngModel)]="query.pageSize"
+                            (ngModelChange)="getUpdate(testForm.controls.stype1.value, 1)"
+                            [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let size of pageSizeOptions" [value]="size">{{size}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select class="" [placeholder]="'Page Number' | translate" [(ngModel)]="query.pageNumber"
+                            (ngModelChange)="getUpdate(testForm.controls.stype1.value)"
+                            [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let size of pageNumber" [value]="size">{{size}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+        </form>
+    </mat-card>
+</div>

@@ -1,0 +1,50 @@
+<div style="display: inline-flex;">
+    <h2 mat-dialog-title>Select File</h2>
+    <span style="position: absolute;right: 30px;">
+        <div class="form-group">
+            <div class="upload-btn-wrapper uploadbtn mr-3">
+                <button type="button"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary cursor-pointer">Upload
+                    File</button>
+                <input type="file" #file
+                    accept="image/png,image/jpeg, application/doc, application/docx, application/pdf"
+                    (change)="onFileSelect($event)">
+            </div>
+            <div>
+                <button type="button"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary cursor-pointer"
+                    (click)="deleteMultiple()">Delete Multiple
+                </button>
+            </div>
+        </div>
+    </span>
+</div>
+<mat-dialog-content>
+    <div style="width: 760px;">
+        <table>
+            <tr *ngFor="let file of filesArray" style="width: 150px; display: inline-block;">
+                <td>
+                    <mat-checkbox (change)="isSelected(file.id)" [checked]="file.isSelected">
+                        <div style="height: 160px; width: 120px;" class="ml-2">
+                            <img *ngIf="file?.id != 0"
+                                style="width:98%; height: 140px; margin-top: 10px; margin-bottom: 10px;"
+                                [src]="checkForImage(file.fileName, file?.fileType)">
+                            <!-- src="http://shalashapi.azurewebsites.net/Uploads/{{file.fileName}}" -->
+                        </div>
+                    </mat-checkbox>
+                    <div style="text-align: center;"><span *ngIf="file.fileName.length <= 10">{{file.fileName}}</span>
+                        <span *ngIf="file.fileName.length > 10">{{file.fileName | slice:0:10}}...</span>
+                        <!-- {{file.fileName | slice:0:14}} {{file.fileName.length > }} -->
+                        <button mat-icon-button color="primary" (click)="confirmDeleteFile(file.id, file.fileName)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()" cdkFocusInitial>Add Files</button>
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

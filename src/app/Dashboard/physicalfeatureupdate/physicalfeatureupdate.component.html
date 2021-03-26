@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>{{'Update Physical Feature' | translate}} </h1>
+<button class=" buttonClose" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+
+    <div class=" app-card search-row-wrapper" style="position: relative;">
+
+        <mat-card>
+            <div class="card-content-content">
+                <!-- <button type="submit"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-accent"
+                    (click)="backtolist()">Back To Values</button> -->
+                <form [formGroup]="characteristicsForm" (ngSubmit)="saveCharacteristics()">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput [placeholder]="'Name' | translate" formControlName="name"
+                                autocomplete="name">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput [placeholder]="'Title' | translate" formControlName="title"
+                                autocomplete="title">
+                        </mat-form-field>
+                    </div>
+                    <!-- <button type="button"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-warn">Delete</button> -->
+                    <button type="submit"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">{{'Update' | translate}}</button>
+                    <button mat-button [mat-dialog-close] style="background-color:#dddddd;"
+                        class="btn ml-3">{{'Cancel' | translate}}</button>
+                </form>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

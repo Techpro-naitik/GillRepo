@@ -1,0 +1,23 @@
+.approveBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    /* border-radius: 2px; */
+    /* cursor: pointer; */
+    /* padding: 2px; */
+    color: #ffffff;
+    background: green;
+    margin-left:10px;
+}
+
+.delBtn{
+    line-height: 22px;
+    text-align: center;
+    font-size: 18px;
+    /* border-radius: 2px; */
+    /* cursor: pointer; */
+    /* padding: 2px; */
+    color: #ffffff;
+    background: red;
+    margin-left: 10px;
+}

@@ -1,0 +1,148 @@
+<h2 mat-dialog-title>Recipients Search</h2>
+<mat-dialog-content>
+    <div class="form-group">
+        <div class="inline-checkbox mb-4">
+            <mat-label class="mr-4">Gender</mat-label>
+            <mat-checkbox type="checkbox" [(ngModel)]="isMale" [ngModelOptions]="{standalone: true}" (change)="!isMale"
+                class="mr-3" value=1>
+                Male
+            </mat-checkbox>
+            <mat-checkbox type="checkbox" [(ngModel)]="isFemale" [ngModelOptions]="{standalone: true}" class="mr-3"
+                (change)="!isFemale" value=0>Female
+            </mat-checkbox>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <mat-label class="mr-4">Age</mat-label>
+        <mat-form-field class="ml-4 ageHeight">
+            <input matInput placeholder="From" type="number" #startAge
+                (change)="searchRequest.ageStart = +startAge.value"
+                [value]="searchRequest.ageStart ? +searchRequest.ageStart: null">
+        </mat-form-field>
+
+        <mat-form-field class="ml-4 ageHeight">
+            <input matInput placeholder="To" type="number" #endAge (change)="searchRequest.ageEnd = +endAge.value"
+                [value]="searchRequest.ageEnd ? +searchRequest.ageEnd: null">
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-label class="mr-4">Height</mat-label>
+        <mat-form-field class="ml-4 ageHeight">
+            <input matInput placeholder="From" type="number" #heightFrom
+                (change)="searchRequest.heightStart = +heightFrom.value"
+                [value]="searchRequest.heightStart ? +searchRequest.heightStart: null">
+        </mat-form-field>
+
+        <mat-form-field class="ml-4 ageHeight">
+            <input matInput placeholder="To" #heightTo (change)="searchRequest.heightEnd = +heightTo.value"
+                [value]="searchRequest.heightEnd ? +searchRequest.heightEnd: null">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="full-wid">
+            <input matInput placeholder="First Name" #fName (change)="searchRequest.firstName = fName.value"
+                [value]="searchRequest.firstName ? searchRequest.firstName: null">
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="full-wid">
+            <input matInput placeholder="Last Name" #LName (change)="searchRequest.lastName = LName.value"
+                [value]="searchRequest.lastName ? searchRequest.lastName: null">
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <!-- <mat-label>Agency</mat-label> -->
+            <mat-select placeholder="Agency" #agency [(ngModel)]="searchRequest.agencyIds"
+                (ngModelChange)="changeAgency(agency.value)" multiple>
+                <mat-option *ngFor="let agency of agencies" [value]="agency.id" [ngStyle]="{'background-color': agency.agencyColor}">{{agency.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <mat-select placeholder="Subscription" #byDate [(ngModel)]="searchRequest.isFriend"
+                (ngModelChange)="onFriendChange(byDate.value)">
+                <mat-option value=0>No</mat-option>
+                <mat-option value=1>Yes</mat-option>
+                <mat-option value=2>Yes, by date</mat-option>
+                <mat-option value=3>Does not matter</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="byDate.value == '2'">
+        <mat-form-field class="full-wid">
+            <input matInput [matDatepicker]="pickerSubDate" #subDate (click)="pickerSubDate.open()"
+                (dateChange)="memEndDate(subDate.value)" placeholder="Subscription end date" required
+                [value]="searchRequest.membershipEndDate ? searchRequest.membershipEndDate : null">
+            <mat-datepicker-toggle matSuffix [for]="pickerSubDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerSubDate></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-card style="box-shadow: none !important;">
+            <table class="physicTable">
+                <tr *ngFor="let char of characteristicsData; let i = index;">
+                    <td>
+                        <mat-chip-list>
+                            <mat-chip color="primary"
+                                [ngStyle]="{background: char.toggle === true? 'cadetblue' : '#e0e0e0'}"
+                                (click)="toggleCharChips(char?.toggle, char.characteristicId)">
+                                {{char?.name}}
+                                <mat-icon *ngIf="char?.toggle">arrow_left</mat-icon>
+                                <mat-icon *ngIf="!char?.toggle">arrow_right</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </td>
+                    <td>
+                        <div class="row container-fluid" id="divshow"
+                            [ngStyle]="{display: char.toggle === true? 'block' : 'none'}">
+                            <mat-checkbox class="mr-2" *ngFor="let boxes of char?.options; let index= index;"
+                                (click)="checkSelectedValue(i, index, boxes?.isSelected)" [value]="boxes?.id">
+                                {{boxes?.value}}
+                            </mat-checkbox>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </mat-card>
+        <button class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-2 mb-3"
+            (click)="searchRecipients()">Search</button>
+    </div>
+    <div>
+        <div *ngIf="allArtists?.length > 0">
+            <b>Recipients list</b>
+            <button class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2 mt-2 mb-3"
+                (click)="selectAll()">{{isAllSelected}}</button>
+        </div>
+        <table>
+            <tr *ngFor="let artist of allArtists">
+                <td>
+                    <mat-checkbox (change)="toggleStatus(artist.id)" [checked]="artist.isSelected">{{artist.firstName}} {{artist.lastName}}
+                    </mat-checkbox>
+                </td>
+            </tr>
+        </table>
+
+        <div class="mt-3">
+            <mat-form-field>
+                <mat-select placeholder="Page number" [(ngModel)]="pageNumber" (ngModelChange)="searchRecipients()">
+                    <mat-option *ngFor="let page of pageSizeOptions" [value]="page">{{page}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()" class="btn btn-primary mat-raised-button mat-button-base mat-primary">Add
+        recipients</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

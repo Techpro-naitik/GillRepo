@@ -1,0 +1,8 @@
+<div style="text-align: center;">
+    <img *ngIf="artist.artistImages.length > 0"
+        src="http://shalashapi.azurewebsites.net/Uploads/{{artist.artistImages[0].fileName}}"
+        style="min-height: 200px; min-width: 200px;max-height: 200px; max-width: 200px;">
+    <img *ngIf="artist.artistImages.length === 0" src="../../../assets/image/defaultprofile.png"
+        style="min-height: 200px; min-width: 200px;max-height: 200px; max-width: 200px;">
+    <a [routerLink]="['/dashboard/playerupdate']" [queryParams]="{ id:artist.id , tab:0}">{{artist?.name}}</a>
+</div>

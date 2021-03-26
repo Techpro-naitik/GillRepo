@@ -1,0 +1,52 @@
+mat-tab-group mat-icon{
+    margin-right: 10px;
+}
+
+.table1{
+    width: 50%;
+    margin-left: 10px;
+    /* text-align: center; */
+}
+
+p{  
+    padding: 10px;
+    font-weight: 700;
+}
+
+.table1 mat-checkbox{
+    margin-right: 10px;
+}
+
+.table1 tr td img{
+    margin-top: 5px;
+    height: 150px;
+    width: 150px;
+}
+
+.table2 tr td img{
+    margin-top: 5px;
+    height: 150px;
+    width: 150px;
+}
+
+.table2 th{
+    text-align: left;
+}
+
+.table2{
+    width: 60%;
+}
+
+.table2 tr td img{
+    margin-top: 5px;
+}
+
+@media(max-width: 1279px){
+    .table1{
+        width: 100%;
+    }
+}
+
+mat-card{
+    min-height: 600px;
+}

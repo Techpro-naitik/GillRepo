@@ -1,0 +1,31 @@
+ul li{
+    cursor: pointer;
+}
+
+.uploadbtn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+.uploadbtn p{
+    float: right;
+    margin-left: 10px;
+    margin-top: 3px;
+}  
+
+.uploadbtn input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .mat-icon-button{
+    width:30px;
+  }
+
+  .form-group{
+    display: flex;
+  }

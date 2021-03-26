@@ -1,0 +1,30 @@
+<h1 mat-dialog-title *ngIf="data">{{'Edit Subscription' | translate}}</h1>
+<h1 mat-dialog-title *ngIf="!data">{{'Add Subscription' | translate}}</h1>
+<button class=" buttonClose" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<div class="card-title" style="box-shadow:none !important;">
+    <form [formGroup]="subscriptionForm">
+        <div>
+            <mat-form-field>
+                <input matInput type="text" [placeholder]="'Name' | translate" formControlName="typeName">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput type="color" #clr [placeholder]="'Color Code' | translate" formControlName="typeColor">
+            </mat-form-field>
+            <p [ngStyle]="{ color: clr.value? clr.value : null }" style="font-weight: 600;">
+                {{subscriptionForm?.controls.typeColor.value}}
+            </p>
+        </div>
+    </form>
+    <div>
+        <button *ngIf="!data" (click)="createSubscription()" cdkFocusInitial mat-raised-button
+            color="primary">{{'Add' | translate}}</button>
+        <button *ngIf="data" (click)="editSubscription()" cdkFocusInitial mat-raised-button
+            color="primary">{{'Update' | translate}}</button>
+        <button mat-button [mat-dialog-close]>{{'Cancel' | translate}}</button>
+    </div>
+
+</div>

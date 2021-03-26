@@ -1,0 +1,40 @@
+<div class="app-card-title mb-4">
+    <!-- <anglo-title-component title="Search Row"></anglo-title-component> -->
+</div>
+<div class=" app-card search-row-wrapper">
+    <mat-card>
+        <div class="card-content-content">
+            <button type="submit" class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                (click)="updateprops(false)">{{'Add an audition type' | translate}}</button>
+
+            <div class="table-responsive overflow-hidden">
+                <table style="box-shadow:none !important;" #table mat-table [dataSource]="dataSource" matSort
+                    matSortDirection="asc" matSortDisableClear class="mat-elevation-z8 full-wid">
+
+                    <ng-container matColumnDef="typeName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'Name' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.typeName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Edited">
+                        <th mat-header-cell *matHeaderCellDef>{{'Action' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-icon class="icon-color editBtn" style="cursor:pointer" (click)="updateprops(element)">
+                                edit
+                            </mat-icon>
+                            <mat-icon class="icon-color dltBtn" style="cursor:pointer"
+                                (click)="openDialog('Delete',element)">
+                                delete
+                            </mat-icon>
+                        </td>
+
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayCoulmns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayCoulmns;"></tr>
+                </table>
+
+            </div>
+            <mat-paginator [pageSizeOptions]="[ 10, 25, 50]"></mat-paginator>
+        </div>
+    </mat-card>
+</div>

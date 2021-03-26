@@ -1,0 +1,461 @@
+<div class="grid-wrapper card-margin" fxLayout="row wrap">
+    <div class="app-card" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="100" fxFlex.xl="100">
+        <mat-card>
+            <div class="card-title" style="box-shadow:none !important;">
+                {{'Actor Update' | translate}} | <span style="cursor: pointer;text-decoration: underline;color:blue;"
+                    (click)="pageforsearch()"> {{'Actor Search' | translate}}</span>
+            </div>
+            <div class="card-content p-2">
+                <mat-tab-group [selectedIndex]="activeTab" color="accent">
+                    <mat-tab [label]="'Edit Actor details' | translate">
+                        <mat-label><span class="modalBtn"
+                                (click)="openDialog3()">{{'Edit Subscription Type' | translate}}</span>
+                        </mat-label>
+                        <div class="demo-tab-content p-2">
+                            <form [formGroup]="myForm" (ngSubmit)="artistUpdate()">
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'FirstName' | translate"
+                                            formControlName="FirstName" autocomplete="FirstName" required>
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['FirstName'].touched && !myForm.controls['FirstName'].valid">
+                                        <mat-error *ngIf="myForm.controls['FirstName'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'FNR' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'LastName' | translate"
+                                            formControlName="LastName" autocomplete="LastName" required>
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['LastName'].touched && !myForm.controls['LastName'].valid">
+                                        <mat-error *ngIf="myForm.controls['LastName'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'LNR' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Agency' | translate" formControlName="agency"
+                                            required>
+                                            <mat-option *ngFor="let item of allAgency" [value]="item.id">{{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Gender' | translate" formControlName="Gender">
+                                            <mat-option [value]=1>{{'Female' | translate}}</mat-option>
+                                            <mat-option [value]=0>{{'Male' | translate}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'Height' | translate" type="number"
+                                            formControlName="Height" required autocomplete="Height">
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['Height'].touched && !myForm.controls['Height'].valid">
+                                        <mat-error *ngIf="myForm.controls['Height'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'HR' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [matDatepicker]="picker1" formControlName='BirthDay'
+                                            [placeholder]="'DOB' | translate" required autocomplete="BirthDay">
+                                        <!-- <input matInput [ngModel]="pickerTwoValue | date:'dd/MM/yyyy'" placeholder="Choose a date">                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle> -->
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <textarea matInput [placeholder]="'Leave a comment' | translate"
+                                            formControlName="Descrp" autocomplete="Descrp"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [matDatepicker]="picker2" formControlName='MembershipStartDate'
+                                            [placeholder]="'Subscription from' | translate"
+                                            autocomplete="MembershipStartDate">
+                                        <!-- <input matInput [ngModel]="pickerTwoValue | date:'dd/MM/yyyy'" placeholder="Choose a date">  -->
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [matDatepicker]="picker3" formControlName='MembershipExpiryDate'
+                                            [placeholder]="'Subscription To' | translate"
+                                            autocomplete="MembershipExpiryDate">
+                                        <!-- <input matInput [ngModel]="pickerTwoValue | date:'dd/MM/yyyy'" placeholder="Choose a date">  -->
+                                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker3></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <textarea matInput [placeholder]="'Remarks' | translate"
+                                            formControlName='Remarks' autocomplete="Remarks"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Disabled' | translate" formControlName="Disable"
+                                            required>
+                                            <mat-option [value]=0>{{'No' | translate}}</mat-option>
+                                            <mat-option [value]=1>{{'Yes' | translate}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Hidden' | translate" formControlName="Hidden"
+                                            required>
+                                            <mat-option [value]=0>{{'No' | translate}}</mat-option>
+                                            <mat-option [value]=1>{{'Yes' | translate}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput type="email" [placeholder]="'Email' | translate"
+                                            formControlName="Email" autocomplete="Email">
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['Email'].touched && !myForm.controls['Email'].valid">
+                                        <mat-error *ngIf="myForm.controls['Email'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'ER' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'Phone' | translate" formControlName="Phone"
+                                            type="number" autocomplete="Phone">
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['Phone'].touched && !myForm.controls['Phone'].valid">
+                                        <mat-error *ngIf="myForm.controls['Phone'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'PR' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Maximum images' | translate"
+                                            formControlName="MaxPictures" required>
+
+                                            <mat-option [value]=0>1</mat-option>
+                                            <mat-option [value]=1>2</mat-option>
+                                            <mat-option [value]=2>3</mat-option>
+                                            <mat-option [value]=3>4</mat-option>
+                                            <mat-option [value]=4>5</mat-option>
+                                            <mat-option [value]=5>6</mat-option>
+                                            <mat-option [value]=6>7</mat-option>
+                                            <mat-option [value]=7>8</mat-option>
+                                            <mat-option [value]=8>9</mat-option>
+                                            <mat-option [value]=9>10</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Maximum Video' | translate"
+                                            formControlName="MaxVideos" required>
+                                            <mat-option [value]=0>1</mat-option>
+                                            <mat-option [value]=1>2</mat-option>
+                                            <mat-option [value]=2>3</mat-option>
+                                            <mat-option [value]=3>4</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Maximum Sound' | translate"
+                                            formControlName="MaxSounds" required>
+                                            <mat-option [value]=0>1</mat-option>
+                                            <mat-option [value]=1>2</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'Username' | translate"
+                                            formControlName="UserName" type="text" autocomplete="UserName">
+                                    </mat-form-field>
+                                    <mat-error
+                                        *ngIf="myForm.controls['UserName'].touched && !myForm.controls['UserName'].valid">
+                                        <mat-error *ngIf="myForm.controls['UserName'].hasError('required') "
+                                            class="required alert-error">
+                                            {{'UR' | translate}}
+                                        </mat-error>
+                                    </mat-error>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <input matInput [placeholder]="'Password' | translate" formControlName="Pswd"
+                                            type="password" autocomplete="Pswd">
+                                    </mat-form-field>
+                                    <!-- <mat-error
+                                        *ngIf="myForm.controls['Pswd'].touched && !myForm.controls['Pswd'].valid">
+                                        <mat-error *ngIf="myForm.controls['Pswd'].hasError('required') "
+                                            class="required alert-error">
+                                            You must include a Password.
+                                        </mat-error>
+                                    </mat-error> -->
+                                </div>
+
+                                <div class="app-card ckeditor-wrapper">
+                                    <mat-card>
+                                        <div fxlayout="row">
+                                            <div class="card-title mb-3 p-2" fxlayout="column">
+                                                <h3>{{'Resume' | translate}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-content p-2">
+                                            <ckeditor formControlName="Resume" type="classic">
+                                            </ckeditor>
+                                        </div>
+                                    </mat-card>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select [placeholder]="'Submit publications' | translate"
+                                            formControlName="Publication">
+                                            <mat-option [value]=0>{{'No' | translate}}</mat-option>
+                                            <mat-option [value]=1>{{'Yes' | translate}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-primary mat-raised-button mat-button-base mat-primary">{{'Update' | translate}}</button>
+                                <button type="button"
+                                    class="btn btn-primary mat-raised-button mat-button-base mat-warn ml-2"
+                                    (click)="openDialog('Delete')">{{'Delete' | translate}}</button>
+                            </form>
+                        </div>
+                    </mat-tab>
+                    <mat-tab [label]="'Edit physically' | translate">
+                        <div class="demo-tab-content p-2">
+
+                            <form [formGroup]="EditPhysically">
+                                <div *ngFor="let char of characteristicsData" class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select placeholder={{char?.name}} [formControlName]="char?.name">
+                                            <mat-option *ngFor="let opts of char?.options" [value]="opts?.id">
+                                                {{opts.value}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <button type="button" (click)="EditPhy()"
+                                    class="btn btn-primary mat-raised-button mat-button-base mat-primary">{{'Save' | translate}}</button>
+                            </form>
+                        </div>
+                    </mat-tab>
+                    <mat-tab [label]="'Edit additional capabilities' | translate">
+                        <div class="demo-tab-content p-2">
+                            <form [formGroup]="propsForm">
+                                <div *ngFor="let drops of propsData" class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <mat-select placeholder={{drops?.prop5Name}}
+                                            [formControlName]="drops?.prop5Name">
+                                            <mat-option *ngFor="let opts of drops?.options" [value]="opts?.id">
+                                                {{opts.value}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </form>
+                            <button type="button" (click)="saveCapabilities()"
+                                class="btn btn-primary mat-raised-button mat-button-base mat-primary ">
+                                {{'Save' | translate}}</button>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab [label]="'Edit photos' | translate">
+                        <div class="example-list ">
+                            <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+                                <div class="example-box" *ngFor="let obj of photosArray; let index = index;" cdkDrag
+                                    [ngStyle]="{border: obj.approved === 1 && obj.id != 0 ? '2px solid green' : '2px solid red' }">
+
+                                    <img *ngIf="obj?.id == 0 && obj?.imgsrc == '' && myForm.controls.Gender.value === 1"
+                                        src="../../../assets/image/maledefault.jpg" style="width:100%; height: 160px;">
+
+                                    <img *ngIf="obj?.id == 0 && obj?.imgsrc == '' && myForm.controls.Gender.value === 0"
+                                        src="../../../assets/image/femaledefault.jpg"
+                                        style="width:100%; height: 160px;">
+
+                                    <img *ngIf="obj?.id != 0" style="width:100%; height: 160px;"
+                                        src="http://shalashapi.azurewebsites.net/Uploads/{{obj.fileName}}">
+
+                                    <img *ngIf="obj?.id == 0 && obj?.imgsrc != ''" style="width:100%; height: 160px;"
+                                        src={{obj.imgsrc}}>
+
+                                    <div class="mediaDiv">
+
+                                        <mat-checkbox type="checkbox" class="mr-1" value="1"
+                                            (change)="markImageAsDelete(obj?.order)"
+                                            [checked]="obj?.markAsDelete === 1">{{'Mark To Delete' | translate}}
+                                        </mat-checkbox>
+
+                                        <mat-radio-button type="radio" class="mr-1" value="obj?.main"
+                                            (change)="markAsFirstPic(obj?.order)" [checked]="obj.main === 1">
+                                            {{'First Picture' | translate}}
+                                        </mat-radio-button>
+
+                                        <mat-checkbox *ngIf="obj.approved ==1" type="checkbox"
+                                            (change)="markHappy(obj?.order)" class="mr-1" [checked]="true">
+                                            {{'Happy' | translate}}
+                                        </mat-checkbox>
+                                        <mat-checkbox *ngIf="obj.approved == 0" type="checkbox"
+                                            (change)="markHappy(obj?.order)" class="mr-1" [checked]="false">
+                                            {{'Happy' | translate}}
+                                        </mat-checkbox>
+                                        <select [value]="photosArray.indexOf(obj) + 1"
+                                            (change)="swap(photosArray.indexOf(obj), $event.target.value - 1)">
+                                            <option *ngFor="let options of dynamicDropDownArray;" [value]='options.id'>
+                                                {{options.value}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uploadMore_Container">
+                            <span *ngIf="countLeft > 0">{{'You can upload' | translate}} {{countLeft}}
+                                {{'more photos' | translate}}</span>
+                            <div class="editphotouploadform">
+                                <div *ngFor="let obj of photosArray" class="form-group">
+                                    <div *ngIf="obj?.id == 0">
+                                        <mat-label class="mr-5">{{'Image' | translate}} {{obj?.order}}:</mat-label>
+                                        <input type="file" #file accept="image/png,image/jpeg"
+                                            (change)="onFileSelect($event, obj?.order)">
+                                        <button *ngIf="obj?.hasImage" (click)="onDeleteImage(obj?.order, file)"
+                                            mat-icon-button>
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button *ngIf="photosArray?.length > 0"
+                                    class="btn btn-primary mat-raised-button mat-button-base mat-primary"
+                                    (click)="test12()">{{'Save' | translate}}</button>
+
+                                <!-- <button class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-3"
+                                    (click)="testmmm()">Check</button> -->
+                            </div>
+                        </div>
+
+                    </mat-tab>
+
+                    <mat-tab [label]="'Edit Media' | translate">
+                        <div class="demo-tab-content p-2" style="width:98% !important">
+                            <div class="form-group">
+                                <mat-form-field class="full-wid" style="width:60%">
+                                    <input matInput [formControl]="videoUrl"
+                                        [placeholder]="'Enter url here' | translate">
+                                </mat-form-field>
+                                <button type="button" (click)="uploadVideo(videoUrl.value)"
+                                    class="ml-3 btn btn-primary mat-raised-button mat-button-base mat-primary ">
+                                    {{'Upload video' | translate}}</button>
+                            </div>
+
+                            <div class="videoCard">
+
+                                <div class="example-list ">
+                                    <div cdkDropList cdkDropListOrientation="horizontal"
+                                        (cdkDropListDropped)="drop1($event)">
+                                        <div class="example-box" *ngFor="let obj of videoArray; let index = index;"
+                                            cdkDrag
+                                            [ngStyle]="{border: obj.approved === 1? '2px solid green' : '2px solid red' }">
+                                            <!-- <b>id: {{ obj.order }}</b> -->
+                                            <select [value]="videoArray.indexOf(obj) + 1"
+                                                (change)="swap1(videoArray.indexOf(obj), $event.target.value - 1)">
+                                                <option *ngFor="let options of dynamicDropDownArrayForVideo;"
+                                                    [value]='options.id'>
+                                                    {{options.value}}
+                                                </option>
+                                            </select>
+                                            <div class="card-content">
+                                                <img src={{obj.embed.thumbnail_url}}
+                                                    (click)="playVideo(obj?.embed.html)">
+                                            </div>
+                                            <div class="mediaDiv">
+                                                <p style="white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;">{{obj?.embed.title}}</p>
+                                                <mat-checkbox *ngIf="obj.approved == 1" type="checkbox"
+                                                    (change)="markVideoHappy(obj?.order)" class="mr-1" [checked]="true">
+                                                    {{'Happy' | translate}}
+                                                </mat-checkbox>
+                                                <mat-checkbox *ngIf="obj.approved == 0" type="checkbox"
+                                                    (change)="markVideoHappy(obj?.order)" class="mr-1"
+                                                    [checked]="false">{{'Happy' | translate}}
+                                                </mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="videoURlForPlayer != ''" class="videoPlayer" [innerHTML]='videoURlForPlayer'>
+                            </div>
+                            <div style="text-align: center;">
+                                <button mat-icon-button *ngIf="videoURlForPlayer != ''" (click)="videoURlForPlayer = ''"
+                                    class="btn btn-primary mat-icon-button mat-button-base mat-primary mt-3">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                            <button type="button" (click)="saveEmbedData()" *ngIf="videoArray?.length > 0"
+                                class="btn btn-primary mat-raised-button mat-button-base mat-primary mt-3">
+                                {{'Save' | translate}}</button>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab [label]="'Edit texts' | translate">
+                        <div class="demo-tab-content p-2">
+                            <form [formGroup]='EditText' (ngSubmit)="Artist_Text_Update()">
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <textarea matInput [placeholder]="'drama' | translate"
+                                            formControlName='Drama'></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <textarea matInput [placeholder]="'comical' | translate"
+                                            formControlName='Comic'></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="full-wid">
+                                        <textarea matInput [placeholder]="'musical' | translate"
+                                            formControlName='Musical'></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-primary mat-raised-button mat-button-base mat-primary">
+                                    {{'Update' | translate}}</button>
+                            </form>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </mat-card>
+    </div>
+</div>

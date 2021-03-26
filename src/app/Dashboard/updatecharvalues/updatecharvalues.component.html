@@ -1,0 +1,27 @@
+<button class=" buttonClose" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+</button>
+<div class="grid-wrapper parentDiv form-validation-wrapper ">
+
+    <div class=" app-card search-row-wrapper" style="position: relative;">
+
+        <mat-card>
+            <h1 mat-dialog-title>{{'Update Values' | translate}}</h1>
+
+            <div class="card-content-content">
+                <form [formGroup]="charValuesForm" (ngSubmit)="updateValue()">
+                    <div class="form-group">
+                        <mat-form-field class="">
+                            <input matInput [placeholder]="'Name' | translate" formControlName="name">
+                        </mat-form-field>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">{{'Update' | translate}}</button>
+                    <button mat-button [mat-dialog-close] style="background-color:#dddddd;"
+                        class="btn ml-3">{{'Cancel' | translate}}</button>
+                </form>
+            </div>
+        </mat-card>
+    </div>
+</div>

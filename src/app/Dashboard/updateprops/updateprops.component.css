@@ -1,0 +1,24 @@
+.buttonClose{
+    width: 20px;
+    right: 0;
+    position: absolute;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000000;
+    cursor:pointer;
+    border:none;
+    color: #ffffff;
+    text-align: center;
+    line-height: 22px;
+    z-index: 999999;
+    top: 8px;
+    right: 8px;
+}
+.buttonClose mat-icon{
+    font-size: 12px;
+    right: 8px;
+    vertical-align: middle;
+    top: 3px;
+    position: relative;
+
+} 

@@ -1,0 +1,77 @@
+<mat-card>
+    <button type="button" class="btn btn-primary mat-raised-button mat-button-base mat-primary mb-2" color="primary"
+        (click)="newscasting()">{{'Go to list' | translate}}</button>
+
+    <form [formGroup]="textForm" (ngSubmit)="saveTextData()" #defaultForm="ngForm">
+        <div class="form-group">
+            <div class=" ckeditor-wrapper">
+                <div class="form-group">
+                    <mat-form-field class="full-wid">
+                        <input matInput formControlName="title" [placeholder]="'Title' | translate"
+                            autocomplete="title">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="full-wid">
+                        <input formControlName="date" matInput [matDatepicker]="picker1" (click)="picker1.open()"
+                            [placeholder]="'Date' | translate" autocomplete="picker1">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field class="full-wid">
+                        <textarea matInput [placeholder]="'Short description' | translate" formControlName="shortText"
+                            autocomplete="shortText"></textarea>
+                    </mat-form-field>
+                </div>
+
+
+                <div fxlayout="row">
+                    <div class="card-title mt-4" fxlayout="column">
+                        <h5 style="margin-bottom:0px;">{{'Text' | translate}}</h5>
+                    </div>
+                </div>
+                <div class="card-content p-2">
+                    <ckeditor formControlName="longText" type="classic"></ckeditor>
+                </div>
+            </div>
+
+            <div *ngIf="imageDisplay != ''">
+                <input type="hidden" formControlname="pic">
+                <img class="textImage" [src]="imageDisplay"
+                    onError="this.src='../../../assets/image/imageNotFound.png'">
+                <mat-label class="mr-3 ml-2">
+                    <p *ngIf="image?.name != null">{{'Selected Image' | translate}}: <b>{{image?.name }}</b></p>
+                </mat-label>
+            </div>
+
+            <div class="form-group ml-2">
+                <div class="upload-btn-wrapper uploadbtn">
+                    <button type="button"
+                        class="btn btn-primary mat-raised-button mat-button-base mat-primary">{{'Upload Image' | translate}}</button>
+                    <input type="file" #file accept="image/png,image/jpeg" (change)="onFileSelect($event, file)">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="ml-2">
+                    <mat-select [placeholder]="'Archive' | translate" formControlName="archive">
+                        <mat-option [value]="0">{{'No' | translate}}</mat-option>
+                        <mat-option [value]="1">{{'Yes' | translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div style="margin-bottom: 50px;">
+                <button *ngIf="textId" type="submit"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">{{'Update' | translate}}</button>
+
+                <button *ngIf="!textId" type="submit"
+                    class="btn btn-primary mat-raised-button mat-button-base mat-primary ml-2">{{'Add' | translate}}</button>
+            </div>
+        </div>
+    </form>
+</mat-card>

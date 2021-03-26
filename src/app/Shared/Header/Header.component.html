@@ -1,0 +1,46 @@
+<div class="header-wrapper">
+   <mat-toolbar class="anglo-header-toolbar px-4">
+      <div fxLayoutAlign="start center">
+         <div class="anglo-ham-icon" fxLayoutAlign="start center">
+            <button class="toggle-btn" mat-card-icon (click)="_toggleSidebarOpened()">
+               <mat-icon class="icon-color">menu</mat-icon>
+            </button>
+         </div>
+         <!-- <div class="a-btn-content">
+            <button mat-icon-button (click)="onSearch()">
+               <mat-icon class="mat-icon">search</mat-icon>
+            </button>
+         </div> -->
+         <!-- <div class="search-form-wrap">
+            <div class="a-close-btn">
+               <button mat-mini-fab mat-icon-button class="close-btn a-btn" (click)="onCloseSlide()">
+                  <mat-icon class="a-icon">close</mat-icon>
+               </button>
+            </div>
+            <div class="centered">
+               <form class="a-form">
+                  <div class="px-5 a-input-field" fxLayoutAlign="center center">
+                     <div class="a-btn-search mr-3">
+                        <mat-icon class="mat-icon text-color">search</mat-icon>
+                     </div>
+                     <mat-form-field class="full-wid" floatLabel="never">
+                        <input matInput type="text" class="form-control" placeholder="what are you looking for..">
+                     </mat-form-field>
+                  </div>
+               </form>
+            </div>
+         </div> -->
+         <div class="breadcrumb-container">
+            <!-- Dashboard > artistmsg > add artist -->
+            <app-breadcrumb></app-breadcrumb>
+         </div>
+      </div>
+      <span fxFlex></span>
+      <div class="secondary-menu full-hght" fxLayoutAlign="center center">
+         <div>
+         </div>
+         <anglo-language-drop-down></anglo-language-drop-down>
+      </div>
+   </mat-toolbar>
+
+</div>
